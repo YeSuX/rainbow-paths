@@ -77,12 +77,12 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   
-  --rainbow-red: "#EB5757";
-  --rainbow-orange: "#F2994A";
-  --rainbow-yellow: "#F2C94C";
-  --rainbow-green: "#6FCF97";
-  --rainbow-blue: "#56CCF2";
-  --rainbow-purple: "#BB6BD9";
+  --rainbow-red: #EB5757;
+  --rainbow-orange: #F2994A;
+  --rainbow-yellow: #F2C94C;
+  --rainbow-green: #6FCF97;
+  --rainbow-blue: #56CCF2;
+  --rainbow-purple: #BB6BD9;
 }
 
 .dark {
