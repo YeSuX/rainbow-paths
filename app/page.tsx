@@ -1,11 +1,9 @@
-import { Hero } from "@/components/hero";
+import { WorldMap } from "@/components/world-map";
 
 export default function Home() {
   return (
     <div className="pt-20">
-      {/* 为导航栏和彩虹条留出空间 */}
-      <Hero />
-
+      <WorldMap />
       {/* 后续内容区域 */}
       <div className="min-h-screen flex items-center justify-center bg-linear-to-b from-white to-gray-50">
         <div className="text-center">
