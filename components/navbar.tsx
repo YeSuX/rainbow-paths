@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Menu, Github } from "lucide-react";
+import { Menu, Github, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -62,7 +62,7 @@ export function Navbar() {
               <span className="text-2xl" role="img" aria-label="rainbow">
                 🌈
               </span>
-              <span className="text-lg font-semibold">Rainbow Paths</span>
+              <span className="text-lg font-semibold">在世界之上</span>
             </Link>
           </Button>
 
@@ -97,20 +97,22 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px]">
               <SheetHeader>
-                <SheetTitle>Edit profile</SheetTitle>
-                <SheetDescription>
-                  Make changes to your profile here. Click save when you&apos;re
-                  done.
-                </SheetDescription>
+                <SheetTitle></SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-4 mt-8">
+              <div className="flex flex-col gap-4">
                 <Button
                   variant="ghost"
-                  className="justify-start"
+                  className="justify-start gap-2"
                   asChild
                   onClick={closeMobileMenu}
                 >
-                  <Link href="/about">关于</Link>
+                  <Link href="/about">
+                    <span>
+                      {/* 例如 Info 图标 */}
+                      <Info className="w-4 h-4" />
+                    </span>
+                    关于
+                  </Link>
                 </Button>
                 <Button
                   variant="ghost"
@@ -118,14 +120,16 @@ export function Navbar() {
                   asChild
                   onClick={closeMobileMenu}
                 >
-                  <a
+                  <Link
                     href="https://github.com/your-repo/rainbow-paths"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Github className="w-4 h-4" />
+                    <span>
+                      <Github className="w-4 h-4" />
+                    </span>
                     GitHub
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </SheetContent>
