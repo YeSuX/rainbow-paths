@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={`antialiased`}>
-        <RainbowBar animated />
+        {/* <RainbowBar animated /> */}
         <Navbar />
         {children}
       </body>
