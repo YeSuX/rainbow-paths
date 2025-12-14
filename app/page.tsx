@@ -20,7 +20,13 @@ export default function Home() {
               <div className="space-y-5">
                 {/* Main Title - Notion style */}
                 <h1 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight tracking-tight">
-                  全球 LGBTQ+ 权利地图
+                  全球 <span style={{ color: "var(--rainbow-red)" }}>L</span>
+                  <span style={{ color: "var(--rainbow-orange)" }}>G</span>
+                  <span style={{ color: "var(--rainbow-blue)" }}>B</span>
+                  <span style={{ color: "var(--rainbow-yellow)" }}>T</span>
+                  <span style={{ color: "var(--rainbow-green)" }}>Q</span>
+                  <span style={{ color: "var(--rainbow-purple)" }}>+</span>{" "}
+                  权利地图
                 </h1>
 
                 {/* Subtitle */}
