@@ -3,28 +3,23 @@ import { WorldMap } from "@/components/world-map";
 
 export default function Home() {
   return (
-    <div className="pt-20">
+    <div className="pt-16">
       {/* Hero Section - Two Column Layout */}
-      <section className="min-h-[calc(100vh-5rem)] flex items-center">
-        <div className="container mx-auto px-6 py-12">
+      <section className="flex items-center">
+        <div className="container mx-auto px-6 py-6">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             {/* Left Column - Title and Description */}
             <div className="flex-1 space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Rainbow Paths
-              </h1>
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-                探索世界的精彩旅程从这里开始。通过可视化的方式，记录和分享你走过的每一段旅程，
-                用色彩斑斓的路径绘制属于你的世界地图。
+                有些人生活在世界之中， 有些人，被世界对待。
               </p>
               <p className="text-base md:text-lg text-gray-500">
-                无论是商务出差、休闲旅行，还是探险冒险，每一次移动都值得被记录。
-                让我们一起发现这个世界的美好，创造独特的旅行记忆。
+                世界地图看起来是一样的。 国界线、海岸线、颜色与名字。
+                但对有些人来说， 这些线条，决定了他们是否会被当成罪犯，
+                是否会被当成病人， 是否被允许牵起另一个人的手。
+                这张地图，只做一件事： 把世界如何对待性少数群体，标出来。
+                不评判，不煽动。 只是让你看见。
               </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Button className="px-6 py-3">开始探索</Button>
-                <Button className="px-6 py-3">了解更多</Button>
-              </div>
             </div>
 
             {/* Right Column - Map */}
