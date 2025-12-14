@@ -10,18 +10,10 @@ export function WorldMap() {
   const map = useMapFactory({
     height: 400,
     width: 800,
-    grid: "square",
-    spacing: 2,
+    grid: "diagonal",
+    spacing: 5,
     geojsonWorld,
   });
 
-  return (
-    <DottedMap
-      map={map}
-      shape="circle"
-      color="#3b82f6"
-      backgroundColor="#f3f4f6"
-      radius={1}
-    />
-  );
+  return <DottedMap map={map} shape="circle" color="#3b82f6" radius={1} />;
 }
