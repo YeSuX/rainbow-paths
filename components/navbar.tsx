@@ -5,7 +5,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 /**
  * 导航栏组件
@@ -33,7 +40,6 @@ export function Navbar() {
   return (
     <motion.nav
       className="fixed top-0 left-0 right-0 z-40 px-4 sm:px-6 lg:px-8"
-      style={{ marginTop: "4px" }} // 为彩虹条留出空间
       initial={{ opacity: 0, y: -64 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
@@ -41,7 +47,7 @@ export function Navbar() {
       <div
         className={`max-w-7xl mx-auto transition-all duration-300 ${
           isScrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg rounded-2xl mt-2"
+            ? "bg-white/70 backdrop-blur-md shadow-lg rounded-2xl mt-2"
             : "bg-transparent"
         }`}
       >
@@ -90,6 +96,13 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px]">
+              <SheetHeader>
+                <SheetTitle>Edit profile</SheetTitle>
+                <SheetDescription>
+                  Make changes to your profile here. Click save when you&apos;re
+                  done.
+                </SheetDescription>
+              </SheetHeader>
               <div className="flex flex-col gap-4 mt-8">
                 <Button
                   variant="ghost"
