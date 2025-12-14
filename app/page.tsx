@@ -6,8 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
@@ -15,53 +13,55 @@ export default function Home() {
     <div className="pt-16">
       {/* Hero Section - Two Column Layout */}
       <section className="flex items-center">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="container mx-auto px-6 py-12 lg:py-16">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             {/* Left Column - Title and Description */}
-            <div className="lg:w-[35%] w-full">
-              <Card className="border-none shadow-none bg-transparent">
-                <CardHeader className="px-0 pb-3">
-                  <div className="flex items-center gap-2 flex-wrap mb-2">
-                    <Badge
-                      variant="outline"
-                      className="text-xs text-gray-400 border-gray-200"
-                    >
-                      🌍 Global Perspective
-                    </Badge>
-                    <Badge
-                      variant="secondary"
-                      className="text-xs bg-gray-50 text-gray-400"
-                    >
-                      🏳️‍🌈 LGBTQ+ Rights
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-lg md:text-xl text-gray-500 font-normal leading-relaxed">
-                    查看全球各国去罪化、去病化与同性婚姻的法律状态
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="px-0 space-y-3">
-                  <Separator className="bg-gray-100" />
-                  <CardDescription className="text-sm md:text-base text-gray-400 leading-relaxed space-y-2">
-                    <p>有些人生活在世界之中， 有些人，被世界对待。</p>
-                    <p>世界地图看起来是一样的。 国界线、海岸线、颜色与名字。</p>
-                    <p>
-                      但对有些人来说， 这些线条，决定了他们是否会被当成罪犯，
-                      是否会被当成病人， 是否被允许牵起另一个人的手。
-                    </p>
-                    <p>
-                      这张地图，只做一件事： 把世界如何对待性少数群体，标出来。
-                    </p>
-                    <p className="text-gray-500">
-                      不评判，不煽动。 只是让你看见。
-                    </p>
-                  </CardDescription>
-                </CardContent>
-              </Card>
+            <div className="lg:w-[40%] w-full">
+              <div className="space-y-5">
+                {/* Main Title - Notion style */}
+                <h1 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight tracking-tight">
+                  全球 LGBTQ+ 权利地图
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+                  追踪各国去罪化、去病化与婚姻平权的法律进展
+                </p>
+
+                {/* Divider */}
+                <div className="pt-2 pb-1">
+                  <div className="h-px bg-gray-200" />
+                </div>
+
+                {/* Description */}
+                <div className="space-y-4 text-base text-gray-600 leading-relaxed">
+                  <p>同一张世界地图，对不同的人意味着不同的现实。</p>
+                  <p>
+                    这些线条决定了一些人能否自由生活，能否不被视为罪犯或病人，能否合法地牵起爱人的手。
+                  </p>
+                </div>
+
+                {/* Tags - Notion style */}
+                <div className="flex items-center gap-2 pt-2">
+                  <Badge
+                    variant="secondary"
+                    className="text-xs font-normal bg-gray-100 text-gray-700 hover:bg-gray-200 border-0"
+                  >
+                    🌍 Global Data
+                  </Badge>
+                  <Badge
+                    variant="secondary"
+                    className="text-xs font-normal bg-gray-100 text-gray-700 hover:bg-gray-200 border-0"
+                  >
+                    🏳️‍🌈 Human Rights
+                  </Badge>
+                </div>
+              </div>
             </div>
 
             {/* Right Column - Map */}
-            <div className="lg:w-[65%] w-full flex justify-center items-center">
-              <div className="w-full max-w-3xl">
+            <div className="lg:w-[60%] w-full">
+              <div className="w-full max-w-4xl mx-auto">
                 <WorldMap />
               </div>
             </div>
@@ -69,22 +69,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Additional Content Section */}
-      <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-50 px-6">
-        <Card className="max-w-2xl w-full border-none shadow-lg">
-          <CardHeader className="text-center">
-            <CardTitle className="text-3xl">更多精彩内容</CardTitle>
-            <CardDescription className="text-base mt-2">
-              滚动查看导航栏效果
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Separator className="mb-4" />
-            <p className="text-muted-foreground text-center">
-              探索更多关于这个项目的信息和资源
-            </p>
-          </CardContent>
-        </Card>
+      {/* Data Section */}
+      <section className="min-h-screen flex items-center justify-center bg-gray-50/30 px-6 py-20">
+        <div className="max-w-4xl w-full">
+          <Card className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow bg-white">
+            <CardHeader className="text-center pt-16 pb-8 space-y-4">
+              <CardTitle className="text-3xl md:text-4xl font-bold text-gray-900">
+                数据背后的故事
+              </CardTitle>
+              <CardDescription className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                每一个颜色的变化，都是无数人努力的结果
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="pb-16 space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                {[
+                  { emoji: "⚖️", label: "法律进展", desc: "Legal Rights" },
+                  { emoji: "🏥", label: "医疗权益", desc: "Healthcare" },
+                  { emoji: "💍", label: "婚姻平权", desc: "Marriage Equality" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="p-6 rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50/50 transition-all"
+                  >
+                    <div className="text-3xl mb-3">{item.emoji}</div>
+                    <div className="text-sm font-semibold text-gray-900 mb-1">
+                      {item.label}
+                    </div>
+                    <div className="text-xs text-gray-500">{item.desc}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="text-center pt-4">
+                <p className="text-sm text-gray-500">
+                  数据来源于公开资料和国际组织报告，持续更新中
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </section>
     </div>
   );
