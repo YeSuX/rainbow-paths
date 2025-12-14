@@ -40,7 +40,7 @@ export function WorldMap() {
 
   return (
     <div ref={containerRef} className="w-full">
-      <DottedMap map={map} shape="circle" color="#3b82f6" radius={1} />
+      <DottedMap map={map} shape="circle" color="#A1A1B5" radius={1} />
     </div>
   );
 }

@@ -62,24 +62,34 @@ export function Navbar() {
               <span className="text-2xl" role="img" aria-label="rainbow">
                 🌈
               </span>
-              <span className="text-lg font-semibold">在世界之上</span>
+              <span className="text-lg font-semibold text-gray-600">
+                在世界之中
+              </span>
             </Link>
           </Button>
 
           {/* 桌面端导航链接 */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 text-gray-600">
             <Button variant="ghost" size="sm" asChild>
-              <Link href="/about">关于</Link>
+              <Link href="/about">
+                <span>
+                  {/* 例如 Info 图标 */}
+                  <Info className="w-4 h-4" />
+                </span>
+                关于
+              </Link>
             </Button>
             <Button variant="ghost" size="sm" asChild>
-              <a
+              <Link
                 href="https://github.com/your-repo/rainbow-paths"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Github className="w-4 h-4" />
+                <span>
+                  <Github className="w-4 h-4" />
+                </span>
                 GitHub
-              </a>
+              </Link>
             </Button>
           </div>
 
@@ -99,7 +109,7 @@ export function Navbar() {
               <SheetHeader>
                 <SheetTitle></SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 text-gray-600">
                 <Button
                   variant="ghost"
                   className="justify-start gap-2"
