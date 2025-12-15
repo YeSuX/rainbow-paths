@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -67,7 +68,16 @@ export default function Home() {
 
             {/* Right Column - Map */}
             <div className="lg:w-[60%] w-full">
-              <div className="w-full max-w-4xl mx-auto bg-amber-100">动画</div>
+              <div className="w-full max-w-4xl mx-auto">
+                <Image
+                  className="rounded-xl"
+                  src="https://plus.unsplash.com/premium_vector-1689096753612-274b36569156?q=80&w=3054&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="World Map"
+                  width={800}
+                  height={400}
+                  unoptimized={true}
+                />
+              </div>
             </div>
           </div>
         </div>
