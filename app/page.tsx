@@ -67,9 +67,7 @@ export default function Home() {
 
             {/* Right Column - Map */}
             <div className="lg:w-[60%] w-full">
-              <div className="w-full max-w-4xl mx-auto">
-                <WorldMap />
-              </div>
+              <div className="w-full max-w-4xl mx-auto bg-amber-100">动画</div>
             </div>
           </div>
         </div>
