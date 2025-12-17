@@ -1,4 +1,4 @@
-import { WorldMap } from "@/components/world-map";
+import { EChartsWorldMap } from "@/components/echarts-world-map";
 import {
   Card,
   CardContent,
@@ -66,19 +66,36 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Column - Map */}
+            {/* Right Column - Picture */}
             <div className="lg:w-[60%] w-full">
               <div className="w-full max-w-4xl mx-auto">
                 <Image
                   className="rounded-xl"
                   src="https://plus.unsplash.com/premium_vector-1689096753612-274b36569156?q=80&w=3054&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="World Map"
+                  alt="Picture"
                   width={800}
                   height={400}
                   unoptimized={true}
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 地图组件 */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-20">
+        <div className="max-w-7xl w-full">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              全球法律进展地图
+            </h2>
+            <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+              点击地图上的国家，查看详细的法律进展信息
+            </p>
+          </div>
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6">
+            <EChartsWorldMap />
           </div>
         </div>
       </section>
