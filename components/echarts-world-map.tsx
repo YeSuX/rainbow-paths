@@ -40,7 +40,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
       },
       geo: {
         map: "world",
-        roam: true,
+        roam: false,
         zoom: 1.2,
         center: [0, 20],
         itemStyle: {
@@ -92,4 +92,3 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
     />
   );
 }
-
