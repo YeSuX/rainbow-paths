@@ -132,7 +132,7 @@ export function createWorldMapOption(
         type: "map",
         map: "world",
         geoIndex: 0,
-        data: mapData,
+        data: [],
         emphasis: {
           label: {
             show: false,
