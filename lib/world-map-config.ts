@@ -132,10 +132,85 @@ export function createWorldMapOption(
         type: "map",
         map: "world",
         geoIndex: 0,
-        data: [],
+        data: mapData,
         emphasis: {
           label: {
             show: false,
+          },
+        },
+      },
+    ],
+  };
+}
+
+/**
+ * Generate complete ECharts option for region map
+ * @param countryCode - ISO country code for the region map
+ * @param _countryName - Country display name (reserved for future use)
+ * @param _mapData - Map data for coloring regions (reserved for future use)
+ */
+export function createRegionMapOption(
+  countryCode: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _countryName: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _mapData: CountryData[]
+): echarts.EChartsOption {
+  return {
+    backgroundColor: MAP_CONFIG.backgroundColor,
+    tooltip: {
+      trigger: "item",
+      formatter: (params: echarts.TooltipComponentFormatterCallbackParams) => {
+        const name = Array.isArray(params) ? params[0]?.name : params.name;
+        return `
+          <div style="padding: 4px 8px;">
+            <strong style="font-size: 14px;">${name || "Unknown"}</strong>
+          </div>
+        `;
+      },
+      backgroundColor: TOOLTIP_STYLES.backgroundColor,
+      borderColor: TOOLTIP_STYLES.borderColor,
+      borderWidth: TOOLTIP_STYLES.borderWidth,
+      textStyle: {
+        color: TOOLTIP_STYLES.textColor,
+      },
+    },
+    geo: {
+      map: countryCode,
+      roam: true,
+      zoom: 1.2,
+      itemStyle: {
+        areaColor: MAP_CONFIG.defaultAreaColor,
+        borderColor: MAP_CONFIG.borderColor,
+        borderWidth: MAP_CONFIG.borderWidth,
+      },
+      emphasis: {
+        itemStyle: {
+          areaColor: MAP_CONFIG.emphasisAreaColor,
+          borderColor: MAP_CONFIG.emphasisBorderColor,
+          borderWidth: MAP_CONFIG.emphasisBorderWidth,
+          shadowBlur: 10,
+          shadowColor: "rgba(0, 0, 0, 0.1)",
+        },
+        label: {
+          show: true,
+          color: "#374151",
+          fontSize: 12,
+        },
+      },
+      label: {
+        show: false,
+      },
+    },
+    series: [
+      {
+        type: "map",
+        map: countryCode,
+        geoIndex: 0,
+        data: [],
+        emphasis: {
+          label: {
+            show: true,
           },
         },
       },
