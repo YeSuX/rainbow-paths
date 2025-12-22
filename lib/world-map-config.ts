@@ -154,7 +154,7 @@ export function createTooltipFormatter() {
 export function createVisualMapPieces() {
   return Object.entries(STATUS_CATEGORIES).map(([key, category]) => ({
     value: category.value,
-    label: key,
+    label: category.name,
     color: category.color,
   }));
 }
