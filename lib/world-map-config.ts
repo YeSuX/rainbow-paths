@@ -272,8 +272,8 @@ export function createRegionMapOption(
     },
     geo: {
       map: countryCode,
-      roam: true,
-      zoom: 1.2,
+      roam: false,
+      zoom: 1.5,
       itemStyle: {
         areaColor: MAP_CONFIG.defaultAreaColor,
         borderColor: MAP_CONFIG.borderColor,
