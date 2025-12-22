@@ -59,7 +59,13 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
       const countryName = params.name as string;
       const countryCode = COUNTRY_NAME_TO_CODE.get(countryName);
 
-      if (!countryCode || !AVAILABLE_REGIONS.has(countryCode)) {
+      if (!countryCode) return;
+
+      // Check if both geo data and region data are available
+      const hasGeoData = AVAILABLE_REGIONS.has(countryCode);
+      const hasRegionData = mapData.regionsByCountry.has(countryCode);
+
+      if (!hasGeoData || !hasRegionData) {
         // No region data available for this country
         return;
       }
@@ -70,7 +76,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
         selectedCountryCode: countryCode,
       });
     },
-    [mapState.level]
+    [mapState.level, mapData.regionsByCountry]
   );
 
   // Handle back to world map
@@ -95,7 +101,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
 
     if (mapState.level === "world") {
       // Show world map
-      const option = createWorldMapOption(mapData);
+      const option = createWorldMapOption(mapData.countries);
       chart.setOption(option, true);
 
       // Add click event listener
@@ -103,21 +109,24 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
       chart.on("click", handleMapClick);
     } else if (mapState.level === "region" && mapState.selectedCountryCode) {
       // Show region map
-      const regionData =
+      const regionGeoData =
         regionGeoJSON[
           mapState.selectedCountryCode as keyof typeof regionGeoJSON
         ];
 
-      if (regionData) {
+      const regionMapData = mapData.regionsByCountry.get(
+        mapState.selectedCountryCode
+      );
+
+      if (regionGeoData && regionMapData && regionMapData.length > 0) {
         echarts.registerMap(
           mapState.selectedCountryCode,
-          regionData as unknown as Parameters<typeof echarts.registerMap>[1]
+          regionGeoData as unknown as Parameters<typeof echarts.registerMap>[1]
         );
 
         const option = createRegionMapOption(
           mapState.selectedCountryCode,
-          mapState.selectedCountry || "",
-          mapData
+          regionMapData
         );
         chart.setOption(option, true);
 
