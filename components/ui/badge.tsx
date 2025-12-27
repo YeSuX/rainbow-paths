@@ -5,18 +5,30 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-full border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-md border-0 px-2 py-1 text-xs font-normal w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none transition-all duration-200 overflow-hidden",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+          "bg-[#F7F6F3] text-[#37352F] [a&]:hover:bg-[#ECECEA]",
         secondary:
-          "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+          "bg-[#F7F6F3] text-[#37352F] [a&]:hover:bg-[#ECECEA]",
         destructive:
-          "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-[#FBE4E4] text-[#991B1B] [a&]:hover:bg-[#FCD5D5]",
         outline:
-          "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+          "border border-[#E3E2E0] text-[#37352F] [a&]:hover:bg-[#F7F6F3]",
+        green:
+          "bg-[#DBEDDB] text-[#2d6a3e] [a&]:hover:bg-[#C6E6C6]",
+        blue:
+          "bg-[#D3E5EF] text-[#1e5a7d] [a&]:hover:bg-[#BDD9E9]",
+        yellow:
+          "bg-[#FBF3DB] text-[#7d6a2d] [a&]:hover:bg-[#F8ECBC]",
+        orange:
+          "bg-[#FDEBD0] text-[#8b5a1f] [a&]:hover:bg-[#FBE0B3]",
+        purple:
+          "bg-[#E8DEEE] text-[#6d3a7f] [a&]:hover:bg-[#DFC9EA]",
+        red:
+          "bg-[#FBE4E4] text-[#991B1B] [a&]:hover:bg-[#FCD5D5]",
       },
     },
     defaultVariants: {

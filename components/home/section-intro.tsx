@@ -3,10 +3,10 @@ import { Info } from "lucide-react";
 
 export function SectionIntro() {
   return (
-    <Alert className="bg-blue-50 border-blue-200 mb-8">
-      <Info className="h-5 w-5 text-blue-600" />
-      <AlertDescription className="ml-2 text-sm md:text-base text-gray-700 space-y-3">
-        <div className="font-semibold text-gray-900 mb-2">关于本节</div>
+    <Alert className="bg-[#D3E5EF] border-[#56CCF2] mb-8">
+      <Info className="h-5 w-5 text-[#1e5a7d]" />
+      <AlertDescription className="ml-2 text-sm md:text-base text-[#37352F] space-y-3">
+        <div className="font-semibold text-[#37352F] mb-2">关于本节</div>
         
         <p>
           地方组织的倡议行动促成了对同性伴侣权利与义务的多种形式的承认，这些承认通过不同的法律制度实现，名称各不相同，所赋予的权利保障程度也不一致，包括<span className="font-medium">民事结合、同居结合、事实伴侣关系、注册伴侣关系以及婚姻</span>等。

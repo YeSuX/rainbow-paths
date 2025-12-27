@@ -47,7 +47,7 @@ export function Navbar() {
       <div
         className={`max-w-7xl mx-auto transition-all duration-300 ${
           isScrolled
-            ? "bg-white/70 backdrop-blur-md shadow-lg rounded-2xl mt-2"
+            ? "bg-white/90 backdrop-blur-lg shadow-[0_2px_8px_rgba(0,0,0,0.06)] rounded-2xl mt-2"
             : "bg-transparent"
         }`}
       >
@@ -55,21 +55,21 @@ export function Navbar() {
           {/* Logo + 品牌名 */}
           <Button
             variant="ghost"
-            className="gap-2 px-3 hover:bg-blue-50/50"
+            className="gap-2 px-3 hover:bg-[#F7F6F3] text-[#37352F]"
             asChild
           >
             <Link href="/" onClick={closeMobileMenu}>
               <span className="text-2xl" role="img" aria-label="rainbow">
                 🌈
               </span>
-              <span className="text-lg font-semibold text-gray-600">
+              <span className="text-lg font-semibold">
                 在世界之中
               </span>
             </Link>
           </Button>
 
           {/* 桌面端导航链接 */}
-          <div className="hidden md:flex items-center gap-1 text-gray-600">
+          <div className="hidden md:flex items-center gap-1 text-[#37352F]">
             <Button variant="ghost" size="sm" asChild>
               <Link href="/about">
                 <span>
@@ -109,7 +109,7 @@ export function Navbar() {
               <SheetHeader>
                 <SheetTitle></SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-4 text-gray-600">
+              <div className="flex flex-col gap-4 text-[#37352F]">
                 <Button
                   variant="ghost"
                   className="justify-start gap-2"

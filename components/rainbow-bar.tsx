@@ -9,9 +9,9 @@ interface RainbowBarProps {
 
 /**
  * 彩虹装饰条组件
- * 位于页面顶部的 4px 渐变装饰条，传递品牌识别和情感连接
+ * 位于页面顶部的 2px 渐变装饰条，传递品牌识别和情感连接（Notion 风格）
  */
-export function RainbowBar({ animated = true, height = 4 }: RainbowBarProps) {
+export function RainbowBar({ animated = true, height = 2 }: RainbowBarProps) {
   return (
     <motion.div
       className="fixed top-0 left-0 right-0 z-50"

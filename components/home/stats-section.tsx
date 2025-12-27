@@ -24,13 +24,13 @@ export function StatsSection() {
     useStatsData();
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-white to-gray-50/50 px-6 py-20">
+    <section className="min-h-screen flex items-center justify-center bg-[#F7F6F3] px-6 py-20">
       <div className="max-w-7xl w-full">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#37352F] mb-4">
             全球统计分析
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-[#787774] max-w-2xl mx-auto">
             基于 {totalCountries} 个国家和地区的数据分析
           </p>
         </div>
@@ -66,11 +66,11 @@ export function StatsSection() {
                             {stat.count} 个国家/地区
                           </Badge>
                         </div>
-                        <span className="text-2xl font-bold text-gray-900">
+                        <span className="text-2xl font-bold text-[#37352F]">
                           {stat.percentage.toFixed(1)}%
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                      <div className="w-full bg-[#E3E2E0] rounded-full h-3 overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all ${getSummaryTypeBarColor(
                             stat.name
@@ -78,8 +78,8 @@ export function StatsSection() {
                           style={{ width: `${stat.percentage}%` }}
                         />
                       </div>
-                      <details className="text-sm text-gray-600">
-                        <summary className="cursor-pointer hover:text-gray-900">
+                      <details className="text-sm text-[#787774]">
+                        <summary className="cursor-pointer hover:text-[#37352F]">
                           查看国家列表 ({stat.count})
                         </summary>
                         <div className="mt-2 pl-4 flex flex-wrap gap-2">
@@ -133,17 +133,17 @@ export function StatsSection() {
                             </div>
                           </TableCell>
                           <TableCell className="text-right">
-                            <Badge variant="outline" className="bg-blue-50">
+                            <Badge variant="blue">
                               {stat.marriageCount}
                             </Badge>
                           </TableCell>
                           <TableCell className="text-right">
-                            <Badge variant="outline" className="bg-purple-50">
+                            <Badge variant="purple">
                               {stat.civilCount}
                             </Badge>
                           </TableCell>
                           <TableCell className="text-right">
-                            <Badge className="bg-gray-900">
+                            <Badge className="bg-[#37352F] text-white">
                               {stat.totalCount}
                             </Badge>
                           </TableCell>
@@ -157,9 +157,9 @@ export function StatsSection() {
                   {mechanismStats.map((stat) => (
                     <details
                       key={stat.name}
-                      className="text-sm text-gray-600 border rounded-lg p-4"
+                      className="text-sm text-[#787774] border border-[#E3E2E0] rounded-lg p-4"
                     >
-                      <summary className="cursor-pointer hover:text-gray-900 font-medium">
+                      <summary className="cursor-pointer hover:text-[#37352F] font-medium">
                         {getMechanismName(stat.name)} - 查看国家列表 (
                         {stat.totalCount})
                       </summary>
@@ -197,26 +197,26 @@ function getSummaryTypeName(name: string): string {
 
 function getSummaryTypeColor(name: string): string {
   const colors: Record<string, string> = {
-    "Marriage & Civil Union": "bg-green-100 text-green-800",
-    "Marriage Only": "bg-blue-100 text-blue-800",
-    Marriage: "bg-blue-100 text-blue-800",
-    "Civil Union Only": "bg-purple-100 text-purple-800",
-    No: "bg-gray-100 text-gray-800",
-    Varies: "bg-amber-100 text-amber-800",
+    "Marriage & Civil Union": "bg-[#DBEDDB] text-[#2d6a3e]",
+    "Marriage Only": "bg-[#D3E5EF] text-[#1e5a7d]",
+    Marriage: "bg-[#D3E5EF] text-[#1e5a7d]",
+    "Civil Union Only": "bg-[#E8DEEE] text-[#6d3a7f]",
+    No: "bg-[#F7F6F3] text-[#787774]",
+    Varies: "bg-[#FBF3DB] text-[#7d6a2d]",
   };
-  return colors[name] || "bg-gray-100 text-gray-800";
+  return colors[name] || "bg-[#F7F6F3] text-[#787774]";
 }
 
 function getSummaryTypeBarColor(name: string): string {
   const colors: Record<string, string> = {
-    "Marriage & Civil Union": "bg-green-500",
-    "Marriage Only": "bg-blue-500",
-    Marriage: "bg-blue-500",
-    "Civil Union Only": "bg-purple-500",
-    No: "bg-gray-400",
-    Varies: "bg-amber-500",
+    "Marriage & Civil Union": "bg-[#6FCF97]",
+    "Marriage Only": "bg-[#56CCF2]",
+    Marriage: "bg-[#56CCF2]",
+    "Civil Union Only": "bg-[#BB6BD9]",
+    No: "bg-[#9B9A97]",
+    Varies: "bg-[#F2C94C]",
   };
-  return colors[name] || "bg-gray-400";
+  return colors[name] || "bg-[#9B9A97]";
 }
 
 function getMechanismName(name: string): string {
