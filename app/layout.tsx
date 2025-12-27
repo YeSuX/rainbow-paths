@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { RainbowBar } from "@/components/rainbow-bar";
 import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
@@ -16,7 +15,6 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className={`antialiased`}>
-        <RainbowBar animated />
         <Navbar />
         {children}
       </body>
