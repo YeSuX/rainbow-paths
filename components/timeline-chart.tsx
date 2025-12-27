@@ -6,7 +6,7 @@ import { useTimelineData } from "@/hooks/use-timeline-data";
 import * as echarts from "echarts";
 
 export function TimelineChart() {
-  const { containerRef, chartInstance } = useECharts();
+  const { containerRef, chartInstance, isMobile } = useECharts();
   const { cumulativeStats } = useTimelineData();
 
   useEffect(() => {
@@ -24,11 +24,13 @@ export function TimelineChart() {
         },
         formatter: function (params: any) {
           const year = params[0].axisValue;
-          let result = `<div style="font-weight: 600; margin-bottom: 6px; color: #37352F;">${year} 年</div>`;
+          const fontSize = isMobile ? 11 : 13;
+          const titleSize = isMobile ? 12 : 14;
+          let result = `<div style="font-weight: 600; margin-bottom: 6px; color: #37352F; font-size: ${titleSize}px;">${year} 年</div>`;
 
           params.forEach((param: any) => {
             result += `
-              <div style="display: flex; align-items: center; margin: 4px 0;">
+              <div style="display: flex; align-items: center; margin: 4px 0; font-size: ${fontSize}px;">
                 <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: ${param.color}; margin-right: 8px;"></span>
                 <span style="flex: 1; color: #787774;">${param.seriesName}:</span>
                 <span style="font-weight: 600; margin-left: 12px; color: #37352F;">${param.value}</span>
@@ -41,10 +43,11 @@ export function TimelineChart() {
         backgroundColor: "rgba(255, 255, 255, 0.98)",
         borderColor: "#E3E2E0",
         borderWidth: 1,
-        padding: 12,
+        padding: isMobile ? 8 : 12,
         textStyle: {
           color: "#37352F",
         },
+        confine: true,
         extraCssText:
           "box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); border-radius: 8px;",
       },
@@ -52,15 +55,16 @@ export function TimelineChart() {
         data: ["同性婚姻合法化", "民事结合"],
         top: 10,
         textStyle: {
-          fontSize: 14,
+          fontSize: isMobile ? 12 : 14,
           color: "#37352F",
         },
+        itemGap: isMobile ? 10 : 15,
       },
       grid: {
-        left: "3%",
-        right: "4%",
-        bottom: "8%",
-        top: "15%",
+        left: isMobile ? "5%" : "3%",
+        right: isMobile ? "5%" : "4%",
+        bottom: isMobile ? "12%" : "8%",
+        top: isMobile ? "18%" : "15%",
         containLabel: true,
       },
       xAxis: {
@@ -68,8 +72,10 @@ export function TimelineChart() {
         boundaryGap: false,
         data: years,
         axisLabel: {
-          fontSize: 12,
+          fontSize: isMobile ? 10 : 12,
           color: "#787774",
+          rotate: isMobile ? 45 : 0,
+          interval: isMobile ? "auto" : 0,
         },
         axisLine: {
           lineStyle: {
@@ -79,14 +85,14 @@ export function TimelineChart() {
       },
       yAxis: {
         type: "value",
-        name: "累计国家/地区数",
+        name: isMobile ? "累计数" : "累计国家/地区数",
         nameTextStyle: {
-          fontSize: 12,
+          fontSize: isMobile ? 10 : 12,
           color: "#787774",
           padding: [0, 0, 0, 0],
         },
         axisLabel: {
-          fontSize: 12,
+          fontSize: isMobile ? 10 : 12,
           color: "#787774",
         },
         splitLine: {
@@ -164,16 +170,17 @@ export function TimelineChart() {
       dataZoom: [
         {
           type: "slider",
-          show: true,
+          show: !isMobile,
           start: 0,
           end: 100,
-          height: 25,
+          height: isMobile ? 20 : 25,
           bottom: 10,
           borderColor: "#E3E2E0",
           fillerColor: "rgba(111, 207, 151, 0.2)",
           borderRadius: 4,
           textStyle: {
             color: "#787774",
+            fontSize: isMobile ? 10 : 12,
           },
           handleStyle: {
             color: "#6FCF97",
@@ -183,11 +190,16 @@ export function TimelineChart() {
             color: "#56CCF2",
           },
         },
+        {
+          type: "inside",
+          start: 0,
+          end: 100,
+        },
       ],
     };
 
     chartInstance.current.setOption(option);
-  }, [chartInstance, cumulativeStats]);
+  }, [chartInstance, cumulativeStats, isMobile]);
 
   return (
     <div

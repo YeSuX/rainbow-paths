@@ -24,21 +24,21 @@ export function StatsSection() {
     useStatsData();
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-[#F7F6F3] px-6 py-20">
+    <section className="min-h-screen flex items-center justify-center bg-[#F7F6F3] px-4 sm:px-6 py-12 sm:py-16 md:py-20">
       <div className="max-w-7xl w-full">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#37352F] mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#37352F] mb-3 sm:mb-4">
             全球统计分析
           </h2>
-          <p className="text-base md:text-lg text-[#787774] max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-[#787774] max-w-2xl mx-auto px-4">
             基于 {totalCountries} 个国家和地区的数据分析
           </p>
         </div>
 
         <Tabs defaultValue="summary" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 max-w-2xl mx-auto mb-8">
-            <TabsTrigger value="summary">按状态分类</TabsTrigger>
-            <TabsTrigger value="mechanism">按立法模式</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 max-w-2xl mx-auto mb-6 sm:mb-8">
+            <TabsTrigger value="summary" className="text-xs sm:text-sm">按状态分类</TabsTrigger>
+            <TabsTrigger value="mechanism" className="text-xs sm:text-sm">按立法模式</TabsTrigger>
           </TabsList>
 
           {/* Summary Type Statistics */}
@@ -107,7 +107,39 @@ export function StatsSection() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="overflow-x-auto">
+                {/* Mobile: Card layout */}
+                <div className="block md:hidden space-y-4">
+                  {mechanismStats.map((stat) => (
+                    <div
+                      key={stat.name}
+                      className="border border-[#E3E2E0] rounded-lg p-4 space-y-3"
+                    >
+                      <div className="flex items-center gap-2 font-medium text-[#37352F]">
+                        <span className="text-xl">{getMechanismIcon(stat.name)}</span>
+                        <span>{getMechanismName(stat.name)}</span>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2 text-sm">
+                        <div className="text-center">
+                          <div className="text-xs text-[#787774] mb-1">婚姻</div>
+                          <Badge variant="blue">{stat.marriageCount}</Badge>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-xs text-[#787774] mb-1">民事结合</div>
+                          <Badge variant="purple">{stat.civilCount}</Badge>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-xs text-[#787774] mb-1">总计</div>
+                          <Badge className="bg-[#37352F] text-white">
+                            {stat.totalCount}
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Desktop: Table layout */}
+                <div className="hidden md:block overflow-x-auto">
                   <Table>
                     <TableHeader>
                       <TableRow>

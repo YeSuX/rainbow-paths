@@ -55,14 +55,14 @@ export function Navbar() {
           {/* Logo + 品牌名 */}
           <Button
             variant="ghost"
-            className="gap-2 px-3 hover:bg-[#F7F6F3] text-[#37352F]"
+            className="gap-2 px-3 hover:bg-[#F7F6F3] text-[#37352F] h-11 min-w-[44px]"
             asChild
           >
             <Link href="/" onClick={closeMobileMenu}>
               <span className="text-2xl" role="img" aria-label="rainbow">
                 🌈
               </span>
-              <span className="text-lg font-semibold">
+              <span className="text-base sm:text-lg font-semibold">
                 在世界之中
               </span>
             </Link>
@@ -70,7 +70,7 @@ export function Navbar() {
 
           {/* 桌面端导航链接 */}
           <div className="hidden md:flex items-center gap-1 text-[#37352F]">
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="ghost" size="sm" className="h-10 min-w-[44px]" asChild>
               <Link href="/about">
                 <span>
                   {/* 例如 Info 图标 */}
@@ -79,7 +79,7 @@ export function Navbar() {
                 关于
               </Link>
             </Button>
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="ghost" size="sm" className="h-10 min-w-[44px]" asChild>
               <Link
                 href="https://github.com/your-repo/rainbow-paths"
                 target="_blank"
@@ -99,7 +99,7 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                className="md:hidden"
+                className="md:hidden h-11 w-11 min-w-[44px] min-h-[44px]"
                 aria-label="Toggle menu"
               >
                 <Menu className="w-5 h-5" />
@@ -109,10 +109,10 @@ export function Navbar() {
               <SheetHeader>
                 <SheetTitle></SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col gap-4 text-[#37352F]">
+              <div className="flex flex-col gap-2 text-[#37352F] mt-4">
                 <Button
                   variant="ghost"
-                  className="justify-start gap-2"
+                  className="justify-start gap-2 h-12 min-h-[44px]"
                   asChild
                   onClick={closeMobileMenu}
                 >
@@ -126,7 +126,7 @@ export function Navbar() {
                 </Button>
                 <Button
                   variant="ghost"
-                  className="justify-start"
+                  className="justify-start gap-2 h-12 min-h-[44px]"
                   asChild
                   onClick={closeMobileMenu}
                 >

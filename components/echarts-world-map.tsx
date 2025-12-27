@@ -9,7 +9,7 @@ import { useSameSexMapData } from "@/hooks/use-same-sex-map-data";
 import {
   createWorldMapOption,
   createRegionMapOption,
-  MAP_CONFIG,
+  getResponsiveMapConfig,
 } from "@/lib/world-map-config";
 import { Button } from "@/components/ui/button";
 
@@ -43,13 +43,16 @@ interface MapState {
  */
 export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
   const mapData = useSameSexMapData();
-  const { containerRef, chartInstance } = useECharts();
+  const { containerRef, chartInstance, isMobile } = useECharts();
 
   const [mapState, setMapState] = useState<MapState>({
     level: "world",
     selectedCountry: null,
     selectedCountryCode: null,
   });
+
+  // Get responsive configuration
+  const mapConfig = getResponsiveMapConfig(isMobile);
 
   // Handle map click to drill down to region
   const handleMapClick = useCallback(
@@ -101,7 +104,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
 
     if (mapState.level === "world") {
       // Show world map
-      const option = createWorldMapOption(mapData.countries);
+      const option = createWorldMapOption(mapData.countries, mapConfig);
       chart.setOption(option, true);
 
       // Add click event listener
@@ -126,7 +129,8 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
 
         const option = createRegionMapOption(
           mapState.selectedCountryCode,
-          regionMapData
+          regionMapData,
+          mapConfig
         );
         chart.setOption(option, true);
 
@@ -134,17 +138,17 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
         chart.off("click");
       }
     }
-  }, [mapData, chartInstance, mapState, handleMapClick]);
+  }, [mapData, chartInstance, mapState, handleMapClick, mapConfig]);
 
   return (
     <div className="relative">
       {mapState.level === "region" && (
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.06)] px-4 py-2 border border-[#E3E2E0]">
+        <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-notion-hover px-3 py-2 sm:px-4 border border-[#E3E2E0]">
           <Button
             variant="outline"
             size="sm"
             onClick={handleBackToWorld}
-            className="gap-1"
+            className="gap-1 h-10 min-w-[44px]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -159,9 +163,10 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
             >
               <path d="m15 18-6-6 6-6" />
             </svg>
-            Back to World
+            <span className="hidden sm:inline">Back to World</span>
+            <span className="sm:hidden">返回</span>
           </Button>
-          <span className="text-sm font-medium text-[#37352F]">
+          <span className="text-xs sm:text-sm font-medium text-[#37352F] hidden sm:inline">
             {mapState.selectedCountry}
           </span>
         </div>
@@ -169,7 +174,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
       <div
         ref={containerRef}
         className={`w-full ${className}`}
-        style={{ height: `${MAP_CONFIG.height}px` }}
+        style={{ height: `${mapConfig.height}px` }}
       />
     </div>
   );

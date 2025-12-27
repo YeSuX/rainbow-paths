@@ -75,18 +75,18 @@ export function TimelineEventsList() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <div className="flex gap-2 items-center">
-          <span className="text-sm text-gray-600">筛选类型:</span>
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 sm:items-center sm:justify-between">
+        <div className="flex gap-2 items-center flex-wrap">
+          <span className="text-xs sm:text-sm text-gray-600">筛选类型:</span>
           <Select
             value={filterType}
             onValueChange={(value) =>
               setFilterType(value as "all" | "marriage" | "civil")
             }
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[140px] sm:w-[180px] h-9 text-sm">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -96,13 +96,13 @@ export function TimelineEventsList() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex gap-2 items-center">
-          <span className="text-sm text-gray-600">排序:</span>
+        <div className="flex gap-2 items-center flex-wrap">
+          <span className="text-xs sm:text-sm text-gray-600">排序:</span>
           <Select
             value={sortOrder}
             onValueChange={(value) => setSortOrder(value as "asc" | "desc")}
           >
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[140px] sm:w-[180px] h-9 text-sm">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -114,29 +114,29 @@ export function TimelineEventsList() {
       </div>
 
       {/* Timeline Events */}
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         {eventsByYear.map(
           ({ year, events }) =>
             events.length > 0 && (
               <div key={year} className="relative">
                 {/* Year Badge */}
-                <div className="sticky top-20 z-10 mb-4">
-                  <Badge className="bg-gray-900 text-white text-lg px-4 py-2 shadow-md">
+                <div className="sticky top-16 sm:top-20 z-10 mb-3 sm:mb-4">
+                  <Badge className="bg-gray-900 text-white text-base sm:text-lg px-3 py-1.5 sm:px-4 sm:py-2 shadow-md">
                     {year} 年
                   </Badge>
                 </div>
 
                 {/* Events List */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {events.map((event, idx) => (
                     <div
                       key={`${event.year}-${event.country}-${event.type}-${idx}`}
-                      className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer"
+                      className="bg-white rounded-md sm:rounded-lg border border-gray-200 p-3 sm:p-4 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer active:scale-[0.98] min-h-[44px]"
                       onClick={() => setSelectedEvent(event)}
                     >
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                          <span className="text-2xl">
+                      <div className="flex items-start justify-between mb-2 sm:mb-3">
+                        <h3 className="font-semibold text-sm sm:text-base text-gray-900 flex items-center gap-2">
+                          <span className="text-xl sm:text-2xl">
                             {event.countryCode
                               ? String.fromCodePoint(
                                   ...event.countryCode
@@ -157,7 +157,7 @@ export function TimelineEventsList() {
                         </h3>
                       </div>
                       <div className="space-y-2">
-                        <div className="flex items-center gap-2 flex-wrap">
+                        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                           <Badge
                             variant="outline"
                             className={`text-xs ${getTypeColor(event.type)}`}
@@ -182,10 +182,10 @@ export function TimelineEventsList() {
                           </Badge>
                         </div>
                         {/* 事件概览 */}
-                        <p className="text-xs text-gray-600 mt-2 line-clamp-2">
+                        <p className="text-xs sm:text-sm text-gray-600 mt-1.5 sm:mt-2 line-clamp-2">
                           {getPreview(event.explanation)}
                         </p>
-                        <div className="text-xs text-blue-600 hover:text-blue-700 mt-2">
+                        <div className="text-xs text-blue-600 hover:text-blue-700 mt-1.5 sm:mt-2">
                           点击查看详情 →
                         </div>
                       </div>
@@ -208,10 +208,10 @@ export function TimelineEventsList() {
         open={!!selectedEvent}
         onOpenChange={() => setSelectedEvent(null)}
       >
-        <DialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
-          <DialogHeader className="flex-shrink-0">
-            <DialogTitle className="flex items-center gap-3 text-xl">
-              <span className="text-3xl">
+        <DialogContent className="max-w-3xl max-h-[90vh] sm:max-h-[80vh] overflow-hidden flex flex-col w-[95vw] sm:w-full">
+          <DialogHeader className="shrink-0">
+            <DialogTitle className="flex items-center gap-2 sm:gap-3 text-lg sm:text-xl">
+              <span className="text-2xl sm:text-3xl">
                 {selectedEvent?.countryCode
                   ? String.fromCodePoint(
                       ...selectedEvent.countryCode
@@ -230,7 +230,7 @@ export function TimelineEventsList() {
                 )}
               </div>
             </DialogTitle>
-            <DialogDescription className="flex flex-wrap gap-2 mt-3">
+            <DialogDescription className="flex flex-wrap gap-1.5 sm:gap-2 mt-2 sm:mt-3">
               <Badge
                 variant="outline"
                 className={`${getTypeColor(selectedEvent?.type || "marriage")}`}
@@ -267,11 +267,13 @@ export function TimelineEventsList() {
             </DialogDescription>
           </DialogHeader>
 
-          <ScrollArea className="flex-1 mt-4 overflow-y-auto">
-            <div className="space-y-6 pr-4 pb-4">
+          <ScrollArea className="flex-1 mt-3 sm:mt-4 overflow-y-auto">
+            <div className="space-y-4 sm:space-y-6 pr-2 sm:pr-4 pb-4">
               {/* 详细说明 */}
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2">详细说明</h4>
+                <h4 className="font-semibold text-sm sm:text-base text-gray-900 mb-2">
+                  详细说明
+                </h4>
                 <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
                   {selectedEvent?.explanation || "暂无详细说明"}
                 </div>

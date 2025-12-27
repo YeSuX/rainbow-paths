@@ -25,28 +25,28 @@ export function TimelineStats() {
   const firstMarriageCountry = firstMarriageEvent?.country || "荷兰";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div className="bg-white rounded-lg border border-[#E3E2E0] p-6 text-center hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-200">
-        <div className="text-3xl font-bold text-[#6FCF97] mb-2">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+      <div className="bg-white rounded-md sm:rounded-lg border border-[#E3E2E0] p-5 sm:p-6 text-center hover:shadow-notion-hover transition-all duration-200">
+        <div className="text-2xl sm:text-3xl font-bold text-[#6FCF97] mb-2">
           {marriageCount}
         </div>
-        <div className="text-sm text-[#787774]">
+        <div className="text-xs sm:text-sm text-[#787774]">
           同性婚姻合法化的国家/地区
         </div>
       </div>
-      <div className="bg-white rounded-lg border border-[#E3E2E0] p-6 text-center hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-200">
-        <div className="text-3xl font-bold text-[#BB6BD9] mb-2">
+      <div className="bg-white rounded-md sm:rounded-lg border border-[#E3E2E0] p-5 sm:p-6 text-center hover:shadow-notion-hover transition-all duration-200">
+        <div className="text-2xl sm:text-3xl font-bold text-[#BB6BD9] mb-2">
           {civilCount}
         </div>
-        <div className="text-sm text-[#787774]">
+        <div className="text-xs sm:text-sm text-[#787774]">
           民事结合认可的国家/地区
         </div>
       </div>
-      <div className="bg-white rounded-lg border border-[#E3E2E0] p-6 text-center hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-200">
-        <div className="text-3xl font-bold text-[#56CCF2] mb-2">
+      <div className="bg-white rounded-md sm:rounded-lg border border-[#E3E2E0] p-5 sm:p-6 text-center hover:shadow-notion-hover transition-all duration-200">
+        <div className="text-2xl sm:text-3xl font-bold text-[#56CCF2] mb-2">
           {firstMarriageYear}
         </div>
-        <div className="text-sm text-[#787774]">
+        <div className="text-xs sm:text-sm text-[#787774]">
           首个同性婚姻合法化（{firstMarriageCountry}）
         </div>
       </div>
