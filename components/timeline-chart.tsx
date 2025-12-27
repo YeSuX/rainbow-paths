@@ -24,33 +24,36 @@ export function TimelineChart() {
         },
         formatter: function (params: any) {
           const year = params[0].axisValue;
-          let result = `<div style="font-weight: bold; margin-bottom: 6px;">${year} 年</div>`;
+          let result = `<div style="font-weight: 600; margin-bottom: 6px; color: #37352F;">${year} 年</div>`;
 
           params.forEach((param: any) => {
             result += `
               <div style="display: flex; align-items: center; margin: 4px 0;">
                 <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: ${param.color}; margin-right: 8px;"></span>
-                <span style="flex: 1;">${param.seriesName}:</span>
-                <span style="font-weight: bold; margin-left: 12px;">${param.value}</span>
+                <span style="flex: 1; color: #787774;">${param.seriesName}:</span>
+                <span style="font-weight: 600; margin-left: 12px; color: #37352F;">${param.value}</span>
               </div>
             `;
           });
 
           return result;
         },
-        backgroundColor: "rgba(255, 255, 255, 0.95)",
-        borderColor: "#ddd",
+        backgroundColor: "rgba(255, 255, 255, 0.98)",
+        borderColor: "#E3E2E0",
         borderWidth: 1,
         padding: 12,
         textStyle: {
-          color: "#333",
+          color: "#37352F",
         },
+        extraCssText:
+          "box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); border-radius: 8px;",
       },
       legend: {
         data: ["同性婚姻合法化", "民事结合"],
         top: 10,
         textStyle: {
           fontSize: 14,
+          color: "#37352F",
         },
       },
       grid: {
@@ -66,11 +69,11 @@ export function TimelineChart() {
         data: years,
         axisLabel: {
           fontSize: 12,
-          color: "#666",
+          color: "#787774",
         },
         axisLine: {
           lineStyle: {
-            color: "#ddd",
+            color: "#E3E2E0",
           },
         },
       },
@@ -79,16 +82,16 @@ export function TimelineChart() {
         name: "累计国家/地区数",
         nameTextStyle: {
           fontSize: 12,
-          color: "#666",
+          color: "#787774",
           padding: [0, 0, 0, 0],
         },
         axisLabel: {
           fontSize: 12,
-          color: "#666",
+          color: "#787774",
         },
         splitLine: {
           lineStyle: {
-            color: "#eee",
+            color: "#F1F0ED",
           },
         },
       },
@@ -101,23 +104,23 @@ export function TimelineChart() {
           lineStyle: {
             width: 3,
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: "#FF6B6B" },
-              { offset: 0.5, color: "#FFD93D" },
-              { offset: 1, color: "#6BCF7F" },
+              { offset: 0, color: "#6FCF97" }, // 彩虹绿
+              { offset: 0.5, color: "#56CCF2" }, // 彩虹蓝
+              { offset: 1, color: "#BB6BD9" }, // 彩虹紫
             ]),
           },
           itemStyle: {
-            color: "#FF6B6B",
+            color: "#6FCF97",
           },
           areaStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "rgba(255, 107, 107, 0.3)",
+                color: "rgba(111, 207, 151, 0.3)",
               },
               {
                 offset: 1,
-                color: "rgba(255, 107, 107, 0.05)",
+                color: "rgba(111, 207, 151, 0.05)",
               },
             ]),
           },
@@ -133,23 +136,23 @@ export function TimelineChart() {
           lineStyle: {
             width: 3,
             color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-              { offset: 0, color: "#4ECDC4" },
-              { offset: 0.5, color: "#6C63FF" },
-              { offset: 1, color: "#A685E2" },
+              { offset: 0, color: "#BB6BD9" }, // 彩虹紫
+              { offset: 0.5, color: "#F2994A" }, // 彩虹橙
+              { offset: 1, color: "#F2C94C" }, // 彩虹黄
             ]),
           },
           itemStyle: {
-            color: "#4ECDC4",
+            color: "#BB6BD9",
           },
           areaStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: "rgba(78, 205, 196, 0.3)",
+                color: "rgba(187, 107, 217, 0.3)",
               },
               {
                 offset: 1,
-                color: "rgba(78, 205, 196, 0.05)",
+                color: "rgba(187, 107, 217, 0.05)",
               },
             ]),
           },
@@ -166,9 +169,18 @@ export function TimelineChart() {
           end: 100,
           height: 25,
           bottom: 10,
-          borderColor: "#ddd",
+          borderColor: "#E3E2E0",
+          fillerColor: "rgba(111, 207, 151, 0.2)",
+          borderRadius: 4,
           textStyle: {
-            color: "#666",
+            color: "#787774",
+          },
+          handleStyle: {
+            color: "#6FCF97",
+            borderColor: "#6FCF97",
+          },
+          moveHandleStyle: {
+            color: "#56CCF2",
           },
         },
       ],
@@ -185,4 +197,3 @@ export function TimelineChart() {
     />
   );
 }
-

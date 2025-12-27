@@ -2,27 +2,27 @@ import * as echarts from "echarts";
 import { STATUS_CATEGORIES, DetailedData, RegionData } from "@/hooks/use-same-sex-map-data";
 import { getCountryName } from "@/lib/translations";
 
-// Map display constants
+// Map display constants - Notion style
 export const MAP_CONFIG = {
   height: 600,
   zoom: 1.2,
   center: [0, 20] as [number, number],
   backgroundColor: "transparent",
-  defaultAreaColor: "#f9fafb",
-  borderColor: "#d1d5db",
+  defaultAreaColor: "#F7F6F3", // Notion 米白色
+  borderColor: "#E3E2E0", // Notion 边框色
   borderWidth: 0.5,
-  emphasisAreaColor: "#fef3c7",
-  emphasisBorderColor: "#f59e0b",
+  emphasisAreaColor: "#FBF3DB", // 彩虹黄色低饱和背景
+  emphasisBorderColor: "#F2C94C", // 彩虹黄色
   emphasisBorderWidth: 1.5,
 } as const;
 
-// Tooltip styles
+// Tooltip styles - Notion style
 const TOOLTIP_STYLES = {
   backgroundColor: "rgba(255, 255, 255, 0.98)",
-  borderColor: "#e5e7eb",
+  borderColor: "#E3E2E0", // Notion 边框色
   borderWidth: 1,
-  textColor: "#1f2937",
-  noDataColor: "#9ca3af",
+  textColor: "#37352F", // Notion 主文字色
+  noDataColor: "#9B9A97", // Notion 三级文字色
 } as const;
 
 /**
@@ -55,10 +55,10 @@ export function createTooltipFormatter() {
             max-width: 350px; 
             box-sizing: border-box;
           ">
-            <strong style="font-size: 15px; color: #111827; display: block; margin-bottom: 8px;">
+            <strong style="font-size: 15px; color: #37352F; display: block; margin-bottom: 8px;">
               ${safeName}
             </strong>
-            <div style="font-size: 13px; color: #374151; margin-bottom: 6px;">
+            <div style="font-size: 13px; color: #787774; margin-bottom: 6px;">
               <strong>整体状态：</strong>${safeStatus}
             </div>
         `;
@@ -67,8 +67,8 @@ export function createTooltipFormatter() {
         if (data.marriageType) {
           const safeMarriageType = escapeHtml(data.marriageType);
           content += `
-            <div style="border-top: 1px solid #e5e7eb; padding-top: 6px; margin-top: 6px;">
-              <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">
+            <div style="border-top: 1px solid #E3E2E0; padding-top: 6px; margin-top: 6px;">
+              <div style="font-size: 12px; color: #787774; margin-bottom: 4px;">
                 <strong>婚姻：</strong>${safeMarriageType}
                 ${data.marriageCriticalDate ? ` (${data.marriageCriticalDate})` : ''}
               </div>
@@ -101,8 +101,8 @@ export function createTooltipFormatter() {
           const safeCivilType = escapeHtml(data.civilType);
           const safeCivilMechanism = data.civilMechanism ? escapeHtml(data.civilMechanism) : '';
           content += `
-            <div style="border-top: 1px solid #e5e7eb; padding-top: 6px; margin-top: 6px;">
-              <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">
+            <div style="border-top: 1px solid #E3E2E0; padding-top: 6px; margin-top: 6px;">
+              <div style="font-size: 12px; color: #787774; margin-bottom: 4px;">
                 <strong>民事结合：</strong>${safeCivilType}
                 ${data.civilCriticalDate ? ` (${data.civilCriticalDate})` : ''}
                 ${data.civilMechanism ? ` - ${safeCivilMechanism}` : ''}
@@ -116,7 +116,7 @@ export function createTooltipFormatter() {
             content += `
               <div style="
                 font-size: 11px; 
-                color: #9ca3af; 
+                color: #9B9A97; 
                 line-height: 1.5; 
                 max-width: 100%; 
                 word-wrap: break-word; 
@@ -143,7 +143,7 @@ export function createTooltipFormatter() {
     const safeName = escapeHtml(displayName);
     return `
       <div style="padding: 8px 12px;">
-        <strong style="font-size: 14px;">${safeName}</strong>
+        <strong style="font-size: 14px; color: #37352F;">${safeName}</strong>
         <br/>
         <span style="font-size: 12px; color: ${TOOLTIP_STYLES.noDataColor};">
           暂无数据
@@ -212,8 +212,6 @@ export function createWorldMapOption(
           areaColor: MAP_CONFIG.emphasisAreaColor,
           borderColor: MAP_CONFIG.emphasisBorderColor,
           borderWidth: MAP_CONFIG.emphasisBorderWidth,
-          shadowBlur: 10,
-          shadowColor: "rgba(0, 0, 0, 0.1)",
         },
         label: {
           show: false,
@@ -289,12 +287,10 @@ export function createRegionMapOption(
           areaColor: MAP_CONFIG.emphasisAreaColor,
           borderColor: MAP_CONFIG.emphasisBorderColor,
           borderWidth: MAP_CONFIG.emphasisBorderWidth,
-          shadowBlur: 10,
-          shadowColor: "rgba(0, 0, 0, 0.1)",
         },
         label: {
           show: true,
-          color: "#374151",
+          color: "#37352F",
           fontSize: 12,
         },
       },

@@ -139,7 +139,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
   return (
     <div className="relative">
       {mapState.level === "region" && (
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-md px-4 py-2 border border-gray-200">
+        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.06)] px-4 py-2 border border-[#E3E2E0]">
           <Button
             variant="outline"
             size="sm"
@@ -161,7 +161,7 @@ export function EChartsWorldMap({ className = "" }: EChartsWorldMapProps) {
             </svg>
             Back to World
           </Button>
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-sm font-medium text-[#37352F]">
             {mapState.selectedCountry}
           </span>
         </div>
