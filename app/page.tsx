@@ -2,6 +2,7 @@ import { HeroSection } from "@/components/home/hero-section";
 import { MapSection } from "@/components/home/map-section";
 import { TimelineSection } from "@/components/home/timeline-section";
 import { DataSection } from "@/components/home/data-section";
+import { StatsSection } from "@/components/home/stats-section";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <MapSection />
       <TimelineSection />
+      <StatsSection />
       <DataSection />
     </div>
   );
