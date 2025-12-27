@@ -208,8 +208,8 @@ export function TimelineEventsList() {
         open={!!selectedEvent}
         onOpenChange={() => setSelectedEvent(null)}
       >
-        <DialogContent className=" max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
-          <DialogHeader>
+        <DialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+          <DialogHeader className="flex-shrink-0">
             <DialogTitle className="flex items-center gap-3 text-xl">
               <span className="text-3xl">
                 {selectedEvent?.countryCode
@@ -267,8 +267,8 @@ export function TimelineEventsList() {
             </DialogDescription>
           </DialogHeader>
 
-          <ScrollArea className="flex-1 mt-4">
-            <div className="space-y-6 pr-4">
+          <ScrollArea className="flex-1 mt-4 overflow-y-auto">
+            <div className="space-y-6 pr-4 pb-4">
               {/* 详细说明 */}
               <div>
                 <h4 className="font-semibold text-gray-900 mb-2">详细说明</h4>
