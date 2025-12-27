@@ -1,13 +1,22 @@
 import { useMemo } from "react";
 import sameSexData from "@/data/same-sex.json";
 
-interface TimelineEvent {
+export interface TimelineEvent {
+  id: string;
   year: number;
   country: string;
   countryCode: string;
   type: "marriage" | "civil";
   mechanism: string;
-  count: number; // 该年该类型的事件总数
+  count: number;
+  // 详细信息
+  explanation: string;
+  subjurisdiction: string | null;
+  criticalDate2: number | null;
+  repealDate1: number | null;
+  repealDate2: number | null;
+  sources: any[];
+  summaryType: string;
 }
 
 interface TimelineStats {
@@ -28,6 +37,7 @@ export function useTimelineData() {
     sameSexData.forEach((entry: any) => {
       const countryName = entry.motherEntry.jurisdiction.name;
       const countryCode = entry.motherEntry.jurisdiction.a2_code;
+      const subjurisdiction = entry.motherEntry.subjurisdiction?.name || null;
 
       // Process marriage critical dates
       if (
@@ -35,24 +45,40 @@ export function useTimelineData() {
         entry.marriage_critical_date_1
       ) {
         events.push({
+          id: `${entry.id}-marriage`,
           year: entry.marriage_critical_date_1,
           country: countryName,
           countryCode,
           type: "marriage",
           mechanism: entry.marriage_mechanism?.name || "Unknown",
-          count: 0, // Will be calculated later
+          count: 0,
+          explanation: entry.marriage_explan || "",
+          subjurisdiction,
+          criticalDate2: entry.marriage_critical_date_2,
+          repealDate1: null,
+          repealDate2: null,
+          sources: entry.motherEntry.sources || [],
+          summaryType: entry.summary_type?.name || "",
         });
       }
 
       // Process civil union critical dates
       if (entry.civil_type?.name === "Yes" && entry.civil_critical_date_1) {
         events.push({
+          id: `${entry.id}-civil`,
           year: entry.civil_critical_date_1,
           country: countryName,
           countryCode,
           type: "civil",
           mechanism: entry.civil_mechanism?.name || "Unknown",
           count: 0,
+          explanation: entry.civil_explan || "",
+          subjurisdiction,
+          criticalDate2: entry.civil_critical_date_2,
+          repealDate1: entry.civil_repeal_date_1,
+          repealDate2: entry.civil_repeal_date_2,
+          sources: entry.motherEntry.sources || [],
+          summaryType: entry.summary_type?.name || "",
         });
       }
     });

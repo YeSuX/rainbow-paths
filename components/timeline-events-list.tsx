@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTimelineData } from "@/hooks/use-timeline-data";
+import { useTimelineData, TimelineEvent } from "@/hooks/use-timeline-data";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -10,6 +10,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function TimelineEventsList() {
   const { timelineEvents } = useTimelineData();
@@ -17,6 +25,9 @@ export function TimelineEventsList() {
     "all"
   );
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(
+    null
+  );
 
   // Get unique years
   const years = Array.from(new Set(timelineEvents.map((e) => e.year))).sort(
@@ -54,6 +65,15 @@ export function TimelineEventsList() {
       : "bg-indigo-100 text-indigo-700 border-indigo-200";
   };
 
+  // 获取概览文本（前100个字符）
+  const getPreview = (text: string) => {
+    if (!text) return "暂无详细说明";
+    const cleanText = text.replace(/\*\*/g, "").replace(/\*/g, "");
+    return cleanText.length > 100
+      ? cleanText.substring(0, 100) + "..."
+      : cleanText;
+  };
+
   return (
     <div className="space-y-6">
       {/* Filters */}
@@ -62,7 +82,9 @@ export function TimelineEventsList() {
           <span className="text-sm text-gray-600">筛选类型:</span>
           <Select
             value={filterType}
-            onValueChange={(value: any) => setFilterType(value)}
+            onValueChange={(value) =>
+              setFilterType(value as "all" | "marriage" | "civil")
+            }
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue />
@@ -78,7 +100,7 @@ export function TimelineEventsList() {
           <span className="text-sm text-gray-600">排序:</span>
           <Select
             value={sortOrder}
-            onValueChange={(value: any) => setSortOrder(value)}
+            onValueChange={(value) => setSortOrder(value as "asc" | "desc")}
           >
             <SelectTrigger className="w-[180px]">
               <SelectValue />
@@ -109,7 +131,8 @@ export function TimelineEventsList() {
                   {events.map((event, idx) => (
                     <div
                       key={`${event.year}-${event.country}-${event.type}-${idx}`}
-                      className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
+                      className="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md hover:border-gray-300 transition-all cursor-pointer"
+                      onClick={() => setSelectedEvent(event)}
                     >
                       <div className="flex items-start justify-between mb-3">
                         <h3 className="font-semibold text-gray-900 flex items-center gap-2">
@@ -123,17 +146,26 @@ export function TimelineEventsList() {
                                 )
                               : "🏳️"}
                           </span>
-                          {event.country}
+                          <div>
+                            {event.country}
+                            {event.subjurisdiction && (
+                              <span className="text-xs font-normal text-gray-500 block">
+                                {event.subjurisdiction}
+                              </span>
+                            )}
+                          </div>
                         </h3>
                       </div>
                       <div className="space-y-2">
-                        <Badge
-                          variant="outline"
-                          className={`text-xs ${getTypeColor(event.type)}`}
-                        >
-                          {event.type === "marriage" ? "同性婚姻" : "民事结合"}
-                        </Badge>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Badge
+                            variant="outline"
+                            className={`text-xs ${getTypeColor(event.type)}`}
+                          >
+                            {event.type === "marriage"
+                              ? "同性婚姻"
+                              : "民事结合"}
+                          </Badge>
                           <Badge
                             variant="outline"
                             className={`text-xs ${getMechanismColor(
@@ -143,11 +175,18 @@ export function TimelineEventsList() {
                             {event.mechanism === "Legislative"
                               ? "立法"
                               : event.mechanism === "Judicial"
-                                ? "司法"
-                                : event.mechanism === "Executive"
-                                  ? "行政"
-                                  : event.mechanism}
+                              ? "司法"
+                              : event.mechanism === "Executive"
+                              ? "行政"
+                              : event.mechanism}
                           </Badge>
+                        </div>
+                        {/* 事件概览 */}
+                        <p className="text-xs text-gray-600 mt-2 line-clamp-2">
+                          {getPreview(event.explanation)}
+                        </p>
+                        <div className="text-xs text-blue-600 hover:text-blue-700 mt-2">
+                          点击查看详情 →
                         </div>
                       </div>
                     </div>
@@ -163,7 +202,172 @@ export function TimelineEventsList() {
           暂无符合条件的数据
         </div>
       )}
+
+      {/* 详情对话框 */}
+      <Dialog
+        open={!!selectedEvent}
+        onOpenChange={() => setSelectedEvent(null)}
+      >
+        <DialogContent className=" max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3 text-xl">
+              <span className="text-3xl">
+                {selectedEvent?.countryCode
+                  ? String.fromCodePoint(
+                      ...selectedEvent.countryCode
+                        .toUpperCase()
+                        .split("")
+                        .map((char) => 127397 + char.charCodeAt(0))
+                    )
+                  : "🏳️"}
+              </span>
+              <div>
+                {selectedEvent?.country}
+                {selectedEvent?.subjurisdiction && (
+                  <span className="text-sm font-normal text-gray-500 block">
+                    {selectedEvent.subjurisdiction}
+                  </span>
+                )}
+              </div>
+            </DialogTitle>
+            <DialogDescription className="flex flex-wrap gap-2 mt-3">
+              <Badge
+                variant="outline"
+                className={`${getTypeColor(selectedEvent?.type || "marriage")}`}
+              >
+                {selectedEvent?.type === "marriage" ? "同性婚姻" : "民事结合"}
+              </Badge>
+              <Badge
+                variant="outline"
+                className={`${getMechanismColor(
+                  selectedEvent?.mechanism || ""
+                )}`}
+              >
+                {selectedEvent?.mechanism === "Legislative"
+                  ? "立法"
+                  : selectedEvent?.mechanism === "Judicial"
+                  ? "司法"
+                  : selectedEvent?.mechanism === "Executive"
+                  ? "行政"
+                  : selectedEvent?.mechanism}
+              </Badge>
+              <Badge variant="outline" className="bg-gray-100">
+                {selectedEvent?.year} 年生效
+              </Badge>
+              {selectedEvent?.criticalDate2 && (
+                <Badge variant="outline" className="bg-gray-100">
+                  {selectedEvent.criticalDate2} 年修订
+                </Badge>
+              )}
+              {selectedEvent?.repealDate1 && (
+                <Badge variant="outline" className="bg-red-100 text-red-700">
+                  {selectedEvent.repealDate1} 年废止
+                </Badge>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+
+          <ScrollArea className="flex-1 mt-4">
+            <div className="space-y-6 pr-4">
+              {/* 详细说明 */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">详细说明</h4>
+                <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  {selectedEvent?.explanation || "暂无详细说明"}
+                </div>
+              </div>
+
+              {/* 关键日期 */}
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">关键日期</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="bg-gray-50 rounded-lg p-3">
+                    <div className="text-xs text-gray-500 mb-1">生效日期</div>
+                    <div className="text-lg font-semibold text-gray-900">
+                      {selectedEvent?.year} 年
+                    </div>
+                  </div>
+                  {selectedEvent?.criticalDate2 && (
+                    <div className="bg-gray-50 rounded-lg p-3">
+                      <div className="text-xs text-gray-500 mb-1">
+                        第二关键日期
+                      </div>
+                      <div className="text-lg font-semibold text-gray-900">
+                        {selectedEvent.criticalDate2} 年
+                      </div>
+                    </div>
+                  )}
+                  {selectedEvent?.repealDate1 && (
+                    <div className="bg-red-50 rounded-lg p-3">
+                      <div className="text-xs text-red-600 mb-1">废止日期</div>
+                      <div className="text-lg font-semibold text-red-700">
+                        {selectedEvent.repealDate1} 年
+                      </div>
+                    </div>
+                  )}
+                  {selectedEvent?.repealDate2 && (
+                    <div className="bg-red-50 rounded-lg p-3">
+                      <div className="text-xs text-red-600 mb-1">
+                        第二废止日期
+                      </div>
+                      <div className="text-lg font-semibold text-red-700">
+                        {selectedEvent.repealDate2} 年
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* 法律来源 */}
+              {selectedEvent?.sources && selectedEvent.sources.length > 0 && (
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    法律来源文件 ({selectedEvent.sources.length})
+                  </h4>
+                  <div className="space-y-2">
+                    {selectedEvent.sources.slice(0, 5).map((source) => (
+                      <div
+                        key={source.id}
+                        className="bg-gray-50 rounded-lg p-3 text-sm"
+                      >
+                        <div className="font-medium text-gray-900 mb-1">
+                          {source.original_official_filename ||
+                            source.original_filename}
+                        </div>
+                        {source.original_language && (
+                          <div className="text-xs text-gray-500">
+                            语言: {source.original_language.name}
+                          </div>
+                        )}
+                        {source.enacted && (
+                          <div className="text-xs text-gray-500">
+                            生效时间: {source.enacted}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    {selectedEvent.sources.length > 5 && (
+                      <div className="text-xs text-gray-500 text-center py-2">
+                        还有 {selectedEvent.sources.length - 5} 个文件未显示
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* 总体状态 */}
+              {selectedEvent?.summaryType && (
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">总体状态</h4>
+                  <Badge className="text-sm px-3 py-1">
+                    {selectedEvent.summaryType}
+                  </Badge>
+                </div>
+              )}
+            </div>
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
-
