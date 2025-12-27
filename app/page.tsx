@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/home/hero-section";
 import { MapSection } from "@/components/home/map-section";
+import { TimelineSection } from "@/components/home/timeline-section";
 import { DataSection } from "@/components/home/data-section";
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
     <div className="pt-16">
       <HeroSection />
       <MapSection />
+      <TimelineSection />
       <DataSection />
     </div>
   );
