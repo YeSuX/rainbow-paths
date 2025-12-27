@@ -1,5 +1,6 @@
 import * as echarts from "echarts";
 import { STATUS_CATEGORIES, DetailedData, RegionData } from "@/hooks/use-same-sex-map-data";
+import { getCountryName } from "@/lib/translations";
 
 // Map display constants
 export const MAP_CONFIG = {
@@ -42,7 +43,9 @@ export function createTooltipFormatter() {
     if (!Array.isArray(params) && params.data) {
       const data = params.data as DetailedData | RegionData;
       if (data.status) {
-        const safeName = escapeHtml(params.name as string);
+        // Use Chinese name for display if available, otherwise use English name
+        const displayName = data.nameCN || params.name as string;
+        const safeName = escapeHtml(displayName);
         const safeStatus = escapeHtml(data.status);
 
         let content = `
@@ -135,7 +138,9 @@ export function createTooltipFormatter() {
 
     // Handle no data case
     const name = Array.isArray(params) ? params[0]?.name : params.name;
-    const safeName = name ? escapeHtml(name as string) : "Unknown";
+    // Try to translate country name to Chinese for display
+    const displayName = name ? getCountryName(name as string) : "未知";
+    const safeName = escapeHtml(displayName);
     return `
       <div style="padding: 8px 12px;">
         <strong style="font-size: 14px;">${safeName}</strong>
@@ -152,7 +157,7 @@ export function createTooltipFormatter() {
  * Generate visual map pieces from status categories
  */
 export function createVisualMapPieces() {
-  return Object.entries(STATUS_CATEGORIES).map(([key, category]) => ({
+  return Object.entries(STATUS_CATEGORIES).map(([, category]) => ({
     value: category.value,
     label: category.name,
     color: category.color,

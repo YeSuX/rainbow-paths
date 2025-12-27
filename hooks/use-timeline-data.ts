@@ -1,5 +1,12 @@
 import { useMemo } from "react";
 import sameSexData from "@/data/same-sex.json";
+import {
+  getCountryName,
+  getMechanismName,
+  getTranslatedField,
+  getSubjurisdictionName,
+  getStatusName,
+} from "@/lib/translations";
 
 export interface TimelineEvent {
   id: string;
@@ -35,50 +42,61 @@ export function useTimelineData() {
     const events: TimelineEvent[] = [];
 
     sameSexData.forEach((entry: any) => {
-      const countryName = entry.motherEntry.jurisdiction.name;
+      const countryNameEn = entry.motherEntry.jurisdiction.name;
+      const countryName = getCountryName(countryNameEn);
       const countryCode = entry.motherEntry.jurisdiction.a2_code;
-      const subjurisdiction = entry.motherEntry.subjurisdiction?.name || null;
+      const subjurisdiction = getSubjurisdictionName(
+        entry.motherEntry.subjurisdiction
+      );
 
       // Process marriage critical dates
       if (
         entry.marriage_type?.name === "Yes" &&
         entry.marriage_critical_date_1
       ) {
+        const mechanismEn = entry.marriage_mechanism?.name || "Unknown";
+        const explanation = getTranslatedField(entry, "marriage_explan");
+        const summaryTypeEn = entry.summary_type?.name || "";
+
         events.push({
           id: `${entry.id}-marriage`,
           year: entry.marriage_critical_date_1,
           country: countryName,
           countryCode,
           type: "marriage",
-          mechanism: entry.marriage_mechanism?.name || "Unknown",
+          mechanism: getMechanismName(mechanismEn),
           count: 0,
-          explanation: entry.marriage_explan || "",
+          explanation: explanation,
           subjurisdiction,
           criticalDate2: entry.marriage_critical_date_2,
           repealDate1: null,
           repealDate2: null,
           sources: entry.motherEntry.sources || [],
-          summaryType: entry.summary_type?.name || "",
+          summaryType: getStatusName(summaryTypeEn),
         });
       }
 
       // Process civil union critical dates
       if (entry.civil_type?.name === "Yes" && entry.civil_critical_date_1) {
+        const mechanismEn = entry.civil_mechanism?.name || "Unknown";
+        const explanation = getTranslatedField(entry, "civil_explan");
+        const summaryTypeEn = entry.summary_type?.name || "";
+
         events.push({
           id: `${entry.id}-civil`,
           year: entry.civil_critical_date_1,
           country: countryName,
           countryCode,
           type: "civil",
-          mechanism: entry.civil_mechanism?.name || "Unknown",
+          mechanism: getMechanismName(mechanismEn),
           count: 0,
-          explanation: entry.civil_explan || "",
+          explanation: explanation,
           subjurisdiction,
           criticalDate2: entry.civil_critical_date_2,
           repealDate1: entry.civil_repeal_date_1,
           repealDate2: entry.civil_repeal_date_2,
           sources: entry.motherEntry.sources || [],
-          summaryType: entry.summary_type?.name || "",
+          summaryType: getStatusName(summaryTypeEn),
         });
       }
     });
