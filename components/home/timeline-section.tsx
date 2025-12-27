@@ -3,6 +3,7 @@
 import { TimelineChart } from "@/components/timeline-chart";
 import { TimelineEventsList } from "@/components/timeline-events-list";
 import { TimelineStats } from "@/components/timeline-stats";
+import { SectionIntro } from "@/components/home/section-intro";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function TimelineSection() {
@@ -17,6 +18,8 @@ export function TimelineSection() {
             追踪同性婚姻和民事结合在全球的立法进程
           </p>
         </div>
+
+        <SectionIntro />
 
         <Tabs defaultValue="chart" className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
