@@ -58,7 +58,7 @@ export function getResponsiveMapConfig(isMobile: boolean): ResponsiveMapConfig {
         fontSize: 10,
         textGap: 5,
       },
-      roam: true, // Enable zoom and pan on mobile
+      roam: false,
     };
   } else {
     // Desktop configuration (>= 768px)
