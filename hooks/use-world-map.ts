@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, MutableRefObject } from "react";
 import * as echarts from "echarts";
 import worldGeoJSON from "@/data/worldEN.json";
 import regionGeoJSON from "@/data/regionEN.json";
-import { MapDataResult, RegionData } from "@/services/mapDataService";
+import { MapDataResult } from "@/services/mapDataService";
 import {
   createWorldMapOption,
   createRegionMapOption,
@@ -35,12 +35,16 @@ interface MapState {
  * @param chartInstance - ECharts instance ref
  * @param mapData - Processed map data from mapDataService
  * @param isMobile - Whether the device is mobile
+ * @param onCountryClick - Callback when a country is clicked at world level
+ * @param onRegionClick - Callback when a region is clicked at region level
  * @returns Map state and control functions
  */
 export function useWorldMap(
   chartInstance: MutableRefObject<echarts.ECharts | null>,
   mapData: MapDataResult,
-  isMobile: boolean
+  isMobile: boolean,
+  onCountryClick?: (countryCode: string, countryName: string) => void,
+  onRegionClick?: (countryCode: string, countryName: string, regionName: string) => void
 ) {
   const [mapState, setMapState] = useState<MapState>({
     level: "world",
@@ -51,22 +55,39 @@ export function useWorldMap(
   // Get responsive configuration
   const mapConfig = getResponsiveMapConfig(isMobile);
 
-  // Handle map click to drill down to region
+  // Handle map click - trigger dialog instead of direct drill-down
   const handleMapClick = useCallback(
     (params: echarts.ECElementEvent) => {
-      if (mapState.level === "region") return; // Already at region level
+      if (mapState.level === "region") {
+        // At region level - trigger region dialog
+        const regionName = params.name as string;
+        if (onRegionClick && mapState.selectedCountryCode && mapState.selectedCountry) {
+          onRegionClick(mapState.selectedCountryCode, mapState.selectedCountry, regionName);
+        }
+        return;
+      }
 
+      // At world level - trigger country dialog
       const countryName = params.name as string;
       const countryCode = COUNTRY_NAME_TO_CODE.get(countryName);
 
       if (!countryCode) return;
 
+      if (onCountryClick) {
+        onCountryClick(countryCode, countryName);
+      }
+    },
+    [mapState.level, mapState.selectedCountry, mapState.selectedCountryCode, onCountryClick, onRegionClick]
+  );
+
+  // Drill down to region level (called from dialog)
+  const drillDownToRegion = useCallback(
+    (countryCode: string, countryName: string) => {
       // Check if both geo data and region data are available
       const hasGeoData = AVAILABLE_REGIONS.has(countryCode);
       const hasRegionData = mapData.regionsByCountry.has(countryCode);
 
       if (!hasGeoData || !hasRegionData) {
-        // No region data available for this country
         return;
       }
 
@@ -76,7 +97,7 @@ export function useWorldMap(
         selectedCountryCode: countryCode,
       });
     },
-    [mapState.level, mapData.regionsByCountry]
+    [mapData.regionsByCountry]
   );
 
   // Handle back to world map
@@ -131,8 +152,9 @@ export function useWorldMap(
         );
         chart.setOption(option, true);
 
-        // Remove click handler at region level
+        // Add click handler at region level for region dialogs
         chart.off("click");
+        chart.on("click", handleMapClick);
       }
     }
   }, [mapData, chartInstance, mapState, handleMapClick, mapConfig]);
@@ -140,6 +162,7 @@ export function useWorldMap(
   return {
     mapState,
     handleBackToWorld,
+    drillDownToRegion,
     mapConfig,
   };
 }
