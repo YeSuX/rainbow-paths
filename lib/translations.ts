@@ -13,11 +13,11 @@ const countryMap = countryNamesZh as CountryNamesMap;
  * 获取国家中文名称，如果没有则返回英文名称
  */
 export function getCountryName(englishName: string, returnEnglish: boolean = false): string {
-    if (returnEnglish) {
-        return englishName;
-    }
 
-    return countryMap[englishName] || "";
+    if (returnEnglish) {
+        return countryMap[englishName] || '';
+    }
+    return countryMap[englishName] || englishName;
 }
 
 /**

@@ -43,7 +43,7 @@ export function useTimelineData() {
 
     sameSexData.forEach((entry: any) => {
       const countryNameEn = entry.motherEntry.jurisdiction.name;
-      const countryName = getCountryName(countryNameEn);
+      const countryName = getCountryName(countryNameEn, true);
       const countryCode = entry.motherEntry.jurisdiction.a2_code;
       const subjurisdiction = getSubjurisdictionName(
         entry.motherEntry.subjurisdiction
