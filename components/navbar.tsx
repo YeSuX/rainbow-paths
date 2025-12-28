@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, Github, Info } from "lucide-react";
@@ -13,6 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useNavbarScroll } from "@/hooks/use-navbar-scroll";
 
 /**
  * 导航栏组件
@@ -23,17 +24,8 @@ import {
  * - 移动端：汉堡菜单
  */
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const isScrolled = useNavbarScroll(10);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 

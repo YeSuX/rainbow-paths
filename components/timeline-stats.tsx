@@ -1,28 +1,22 @@
 "use client";
 
 import { useTimelineData } from "@/hooks/use-timeline-data";
+import { calculateTimelineStatsByType } from "@/services/timelineService";
 
 export function TimelineStats() {
   const { timelineEvents } = useTimelineData();
 
-  // Calculate statistics
-  const marriageCount = new Set(
-    timelineEvents
-      .filter((e) => e.type === "marriage")
-      .map((e) => e.country)
-  ).size;
+  // Calculate statistics using service
+  const marriageStats = calculateTimelineStatsByType(
+    timelineEvents,
+    "marriage"
+  );
+  const civilStats = calculateTimelineStatsByType(timelineEvents, "civil");
 
-  const civilCount = new Set(
-    timelineEvents.filter((e) => e.type === "civil").map((e) => e.country)
-  ).size;
-
-  // Find the first marriage event
-  const firstMarriageEvent = timelineEvents
-    .filter((e) => e.type === "marriage")
-    .sort((a, b) => a.year - b.year)[0];
-
-  const firstMarriageYear = firstMarriageEvent?.year || 2001;
-  const firstMarriageCountry = firstMarriageEvent?.country || "荷兰";
+  const marriageCount = marriageStats.count;
+  const civilCount = civilStats.count;
+  const firstMarriageYear = marriageStats.firstYear;
+  const firstMarriageCountry = marriageStats.firstCountry;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
@@ -53,4 +47,3 @@ export function TimelineStats() {
     </div>
   );
 }
-

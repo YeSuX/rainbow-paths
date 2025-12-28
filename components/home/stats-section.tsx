@@ -8,6 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useStatsData } from "@/hooks/use-stats-data";
+import {
+  getSummaryTypeName,
+  getSummaryTypeColor,
+  getSummaryTypeBarColor,
+  getMechanismName,
+  getMechanismIcon,
+} from "@/services/statsService";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
@@ -212,60 +219,5 @@ export function StatsSection() {
       </div>
     </section>
   );
-}
-
-// Helper functions
-function getSummaryTypeName(name: string): string {
-  const names: Record<string, string> = {
-    "Marriage & Civil Union": "婚姻 & 民事结合",
-    "Marriage Only": "仅婚姻",
-    Marriage: "婚姻",
-    "Civil Union Only": "仅民事结合",
-    No: "不支持",
-    Varies: "因地区而异",
-  };
-  return names[name] || name;
-}
-
-function getSummaryTypeColor(name: string): string {
-  const colors: Record<string, string> = {
-    "Marriage & Civil Union": "bg-[#DBEDDB] text-[#2d6a3e]",
-    "Marriage Only": "bg-[#D3E5EF] text-[#1e5a7d]",
-    Marriage: "bg-[#D3E5EF] text-[#1e5a7d]",
-    "Civil Union Only": "bg-[#E8DEEE] text-[#6d3a7f]",
-    No: "bg-[#F7F6F3] text-[#787774]",
-    Varies: "bg-[#FBF3DB] text-[#7d6a2d]",
-  };
-  return colors[name] || "bg-[#F7F6F3] text-[#787774]";
-}
-
-function getSummaryTypeBarColor(name: string): string {
-  const colors: Record<string, string> = {
-    "Marriage & Civil Union": "bg-[#6FCF97]",
-    "Marriage Only": "bg-[#56CCF2]",
-    Marriage: "bg-[#56CCF2]",
-    "Civil Union Only": "bg-[#BB6BD9]",
-    No: "bg-[#9B9A97]",
-    Varies: "bg-[#F2C94C]",
-  };
-  return colors[name] || "bg-[#9B9A97]";
-}
-
-function getMechanismName(name: string): string {
-  const names: Record<string, string> = {
-    Legislative: "立法",
-    Judicial: "司法",
-    Executive: "行政",
-  };
-  return names[name] || name;
-}
-
-function getMechanismIcon(name: string): string {
-  const icons: Record<string, string> = {
-    Legislative: "📜",
-    Judicial: "⚖️",
-    Executive: "🏛️",
-  };
-  return icons[name] || "📋";
 }
 

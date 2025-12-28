@@ -1,7 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useTimelineData, TimelineEvent } from "@/hooks/use-timeline-data";
+import { useTimelineData } from "@/hooks/use-timeline-data";
+import { useTimelineEventsFilter } from "@/hooks/use-timeline-events-filter";
+import {
+  getMechanismColor,
+  getTypeColor,
+  getPreview,
+  getCountryFlagEmoji,
+  translateMechanism,
+  translateEventType,
+} from "@/services/uiHelperService";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -21,58 +29,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function TimelineEventsList() {
   const { timelineEvents } = useTimelineData();
-  const [filterType, setFilterType] = useState<"all" | "marriage" | "civil">(
-    "all"
-  );
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(
-    null
-  );
-
-  // Get unique years
-  const years = Array.from(new Set(timelineEvents.map((e) => e.year))).sort(
-    (a, b) => (sortOrder === "asc" ? a - b : b - a)
-  );
-
-  // Filter events by type
-  const filteredEvents = timelineEvents.filter((event) => {
-    if (filterType === "all") return true;
-    return event.type === filterType;
-  });
-
-  // Group events by year
-  const eventsByYear = years.map((year) => ({
-    year,
-    events: filteredEvents.filter((e) => e.year === year),
-  }));
-
-  const getMechanismColor = (mechanism: string) => {
-    switch (mechanism) {
-      case "Legislative":
-        return "bg-blue-100 text-blue-700 border-blue-200";
-      case "Judicial":
-        return "bg-purple-100 text-purple-700 border-purple-200";
-      case "Executive":
-        return "bg-green-100 text-green-700 border-green-200";
-      default:
-        return "bg-gray-100 text-gray-700 border-gray-200";
-    }
-  };
-
-  const getTypeColor = (type: string) => {
-    return type === "marriage"
-      ? "bg-pink-100 text-pink-700 border-pink-200"
-      : "bg-indigo-100 text-indigo-700 border-indigo-200";
-  };
-
-  // 获取概览文本（前100个字符）
-  const getPreview = (text: string) => {
-    if (!text) return "暂无详细说明";
-    const cleanText = text.replace(/\*\*/g, "").replace(/\*/g, "");
-    return cleanText.length > 100
-      ? cleanText.substring(0, 100) + "..."
-      : cleanText;
-  };
+  const {
+    filterType,
+    setFilterType,
+    sortOrder,
+    setSortOrder,
+    selectedEvent,
+    setSelectedEvent,
+    eventsByYear,
+  } = useTimelineEventsFilter(timelineEvents);
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -137,14 +102,7 @@ export function TimelineEventsList() {
                       <div className="flex items-start justify-between mb-2 sm:mb-3">
                         <h3 className="font-semibold text-sm sm:text-base text-gray-900 flex items-center gap-2">
                           <span className="text-xl sm:text-2xl">
-                            {event.countryCode
-                              ? String.fromCodePoint(
-                                  ...event.countryCode
-                                    .toUpperCase()
-                                    .split("")
-                                    .map((char) => 127397 + char.charCodeAt(0))
-                                )
-                              : "🏳️"}
+                            {getCountryFlagEmoji(event.countryCode)}
                           </span>
                           <div>
                             {event.country}
@@ -162,9 +120,7 @@ export function TimelineEventsList() {
                             variant="outline"
                             className={`text-xs ${getTypeColor(event.type)}`}
                           >
-                            {event.type === "marriage"
-                              ? "同性婚姻"
-                              : "民事结合"}
+                            {translateEventType(event.type)}
                           </Badge>
                           <Badge
                             variant="outline"
@@ -172,13 +128,7 @@ export function TimelineEventsList() {
                               event.mechanism
                             )}`}
                           >
-                            {event.mechanism === "Legislative"
-                              ? "立法"
-                              : event.mechanism === "Judicial"
-                              ? "司法"
-                              : event.mechanism === "Executive"
-                              ? "行政"
-                              : event.mechanism}
+                            {translateMechanism(event.mechanism)}
                           </Badge>
                         </div>
                         {/* 事件概览 */}
@@ -197,7 +147,8 @@ export function TimelineEventsList() {
         )}
       </div>
 
-      {filteredEvents.length === 0 && (
+      {eventsByYear.reduce((acc, { events }) => acc + events.length, 0) ===
+        0 && (
         <div className="text-center py-12 text-gray-500">
           暂无符合条件的数据
         </div>
@@ -212,14 +163,7 @@ export function TimelineEventsList() {
           <DialogHeader className="shrink-0">
             <DialogTitle className="flex items-center gap-2 sm:gap-3 text-lg sm:text-xl">
               <span className="text-2xl sm:text-3xl">
-                {selectedEvent?.countryCode
-                  ? String.fromCodePoint(
-                      ...selectedEvent.countryCode
-                        .toUpperCase()
-                        .split("")
-                        .map((char) => 127397 + char.charCodeAt(0))
-                    )
-                  : "🏳️"}
+                {getCountryFlagEmoji(selectedEvent?.countryCode || null)}
               </span>
               <div>
                 {selectedEvent?.country}
@@ -235,7 +179,7 @@ export function TimelineEventsList() {
                 variant="outline"
                 className={`${getTypeColor(selectedEvent?.type || "marriage")}`}
               >
-                {selectedEvent?.type === "marriage" ? "同性婚姻" : "民事结合"}
+                {translateEventType(selectedEvent?.type || "marriage")}
               </Badge>
               <Badge
                 variant="outline"
@@ -243,13 +187,7 @@ export function TimelineEventsList() {
                   selectedEvent?.mechanism || ""
                 )}`}
               >
-                {selectedEvent?.mechanism === "Legislative"
-                  ? "立法"
-                  : selectedEvent?.mechanism === "Judicial"
-                  ? "司法"
-                  : selectedEvent?.mechanism === "Executive"
-                  ? "行政"
-                  : selectedEvent?.mechanism}
+                {translateMechanism(selectedEvent?.mechanism || "")}
               </Badge>
               <Badge variant="outline" className="bg-gray-100">
                 {selectedEvent?.year} 年生效
