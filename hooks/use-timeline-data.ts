@@ -58,22 +58,24 @@ export function useTimelineData() {
         const explanation = getTranslatedField(entry, "marriage_explan");
         const summaryTypeEn = entry.summary_type?.name || "";
 
-        events.push({
-          id: `${entry.id}-marriage`,
-          year: entry.marriage_critical_date_1,
-          country: countryName,
-          countryCode,
-          type: "marriage",
-          mechanism: getMechanismName(mechanismEn),
-          count: 0,
-          explanation: explanation,
-          subjurisdiction,
-          criticalDate2: entry.marriage_critical_date_2,
-          repealDate1: null,
-          repealDate2: null,
-          sources: entry.motherEntry.sources || [],
-          summaryType: getStatusName(summaryTypeEn),
-        });
+        if (!!countryName) {
+          events.push({
+            id: `${entry.id}-marriage`,
+            year: entry.marriage_critical_date_1,
+            country: countryName,
+            countryCode,
+            type: "marriage",
+            mechanism: getMechanismName(mechanismEn),
+            count: 0,
+            explanation: explanation,
+            subjurisdiction,
+            criticalDate2: entry.marriage_critical_date_2,
+            repealDate1: null,
+            repealDate2: null,
+            sources: entry.motherEntry.sources || [],
+            summaryType: getStatusName(summaryTypeEn),
+          });
+        }
       }
 
       // Process civil union critical dates
@@ -82,22 +84,24 @@ export function useTimelineData() {
         const explanation = getTranslatedField(entry, "civil_explan");
         const summaryTypeEn = entry.summary_type?.name || "";
 
-        events.push({
-          id: `${entry.id}-civil`,
-          year: entry.civil_critical_date_1,
-          country: countryName,
-          countryCode,
-          type: "civil",
-          mechanism: getMechanismName(mechanismEn),
-          count: 0,
-          explanation: explanation,
-          subjurisdiction,
-          criticalDate2: entry.civil_critical_date_2,
-          repealDate1: entry.civil_repeal_date_1,
-          repealDate2: entry.civil_repeal_date_2,
-          sources: entry.motherEntry.sources || [],
-          summaryType: getStatusName(summaryTypeEn),
-        });
+        if (!!countryName) {
+          events.push({
+            id: `${entry.id}-civil`,
+            year: entry.civil_critical_date_1,
+            country: countryName,
+            countryCode,
+            type: "civil",
+            mechanism: getMechanismName(mechanismEn),
+            count: 0,
+            explanation: explanation,
+            subjurisdiction,
+            criticalDate2: entry.civil_critical_date_2,
+            repealDate1: entry.civil_repeal_date_1,
+            repealDate2: entry.civil_repeal_date_2,
+            sources: entry.motherEntry.sources || [],
+            summaryType: getStatusName(summaryTypeEn),
+          });
+        }
       }
     });
 
@@ -120,7 +124,13 @@ export function useTimelineData() {
   const yearlyStats = useMemo(() => {
     const statsMap = new Map<number, TimelineStats>();
 
+    // 对timelineEvents按year和country去重（同一年同一国家只算一次）
+    const seen = new Set<string>();
     timelineEvents.forEach((event) => {
+      const key = `${event.country}_${event.type}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+
       if (!statsMap.has(event.year)) {
         statsMap.set(event.year, {
           year: event.year,
@@ -138,6 +148,8 @@ export function useTimelineData() {
       }
       stats.totalCount++;
     });
+
+    console.log('---seen---', seen);
 
     return Array.from(statsMap.values()).sort((a, b) => a.year - b.year);
   }, [timelineEvents]);
@@ -162,6 +174,8 @@ export function useTimelineData() {
       };
     });
   }, [yearlyStats]);
+
+  console.log('---yearlyStats stats---', yearlyStats);
 
   return {
     timelineEvents,
