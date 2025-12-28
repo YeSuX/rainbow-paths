@@ -10,14 +10,14 @@ export function HeroSection() {
           <div className="lg:w-[40%] w-full">
             <div className="space-y-4 sm:space-y-5">
               {/* Main Title - Notion style */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#37352F] leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#37352F] leading-tight">
                 全球 <span style={{ color: "var(--rainbow-red)" }}>L</span>
                 <span style={{ color: "var(--rainbow-orange)" }}>G</span>
                 <span style={{ color: "var(--rainbow-blue)" }}>B</span>
                 <span style={{ color: "var(--rainbow-yellow)" }}>T</span>
                 <span style={{ color: "var(--rainbow-green)" }}>Q</span>
                 <span style={{ color: "var(--rainbow-purple)" }}>+</span>{" "}
-                权利地图
+                权益地图
               </h1>
 
               {/* Subtitle */}
@@ -40,12 +40,8 @@ export function HeroSection() {
 
               {/* Tags - Notion style */}
               <div className="flex items-center gap-2 pt-2">
-                <Badge variant="blue">
-                  🌍 Global Data
-                </Badge>
-                <Badge variant="green">
-                  🏳️‍🌈 Human Rights
-                </Badge>
+                <Badge variant="blue">🌍 Global Data</Badge>
+                <Badge variant="green">🏳️‍🌈 Human Rights</Badge>
               </div>
             </div>
           </div>
@@ -68,4 +64,3 @@ export function HeroSection() {
     </section>
   );
 }
-

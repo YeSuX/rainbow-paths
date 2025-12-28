@@ -62,18 +62,14 @@ export function Navbar() {
 
           {/* 桌面端导航链接 */}
           <div className="hidden md:flex items-center gap-1 text-[#37352F]">
-            <Button variant="ghost" size="sm" className="h-10 min-w-[44px]" asChild>
-              <Link href="/about">
-                <span>
-                  {/* 例如 Info 图标 */}
-                  <Info className="w-4 h-4" />
-                </span>
-                关于
-              </Link>
-            </Button>
-            <Button variant="ghost" size="sm" className="h-10 min-w-[44px]" asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 min-w-[44px]"
+              asChild
+            >
               <Link
-                href="https://github.com/your-repo/rainbow-paths"
+                href="https://github.com/YeSuX/rainbow-paths"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -108,22 +104,8 @@ export function Navbar() {
                   asChild
                   onClick={closeMobileMenu}
                 >
-                  <Link href="/about">
-                    <span>
-                      {/* 例如 Info 图标 */}
-                      <Info className="w-4 h-4" />
-                    </span>
-                    关于
-                  </Link>
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="justify-start gap-2 h-12 min-h-[44px]"
-                  asChild
-                  onClick={closeMobileMenu}
-                >
                   <Link
-                    href="https://github.com/your-repo/rainbow-paths"
+                    href="https://github.com/YeSuX/rainbow-paths"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

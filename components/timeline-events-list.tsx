@@ -265,7 +265,7 @@ export function TimelineEventsList() {
                     法律来源文件 ({selectedEvent.sources.length})
                   </h4>
                   <div className="space-y-2">
-                    {selectedEvent.sources.slice(0, 5).map((source) => (
+                    {selectedEvent.sources.map((source) => (
                       <div
                         key={source.id}
                         className="bg-gray-50 rounded-lg p-3 text-sm"
@@ -286,11 +286,6 @@ export function TimelineEventsList() {
                         )}
                       </div>
                     ))}
-                    {selectedEvent.sources.length > 5 && (
-                      <div className="text-xs text-gray-500 text-center py-2">
-                        还有 {selectedEvent.sources.length - 5} 个文件未显示
-                      </div>
-                    )}
                   </div>
                 </div>
               )}
