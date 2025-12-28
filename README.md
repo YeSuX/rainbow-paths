@@ -1,36 +1,295 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rainbow Paths 🌈
 
-## Getting Started
+> _爱的地图,温暖前行_
 
-First, run the development server:
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+
+一个纯公益的全球婚姻平权政策可视化平台,为每一对相爱的人提供清晰、准确、温暖的政策指南。
+
+## 💝 项目愿景
+
+**Rainbow Paths** 致力于让婚姻平权信息变得透明和易获取。我们相信:
+
+- 每一段爱情都值得被看见
+- 每一对伴侣都应该知道自己的选择
+- 信息的透明就是改变的开始
+
+## ✨ 核心功能
+
+### 🗺️ 全球政策地图
+
+- 基于 ECharts 的交互式世界地图
+- 直观的色彩系统展示不同政策状态
+- 点击国家/地区查看详细政策信息
+- 支持搜索和筛选功能
+
+### 📈 平权时间线
+
+- 可视化展示全球婚姻平权历程
+- 交互式图表展示重要历史节点
+- 事件详情和政策变化追踪
+- 多维度数据统计分析
+
+### 📊 数据统计
+
+- 实时统计全球政策覆盖情况
+- 多维度数据可视化
+- 趋势分析和洞察
+
+### 📋 详细指南
+
+- 清晰的办理流程说明
+- 所需材料清单
+- 本地公益组织和法律资源
+- 真实案例分享(规划中)
+
+## 🛠️ 技术栈
+
+### 核心框架
+
+- **[Next.js 16](https://nextjs.org/)** - React 框架,使用 App Router
+- **[TypeScript](https://www.typescriptlang.org/)** - 类型安全
+- **[React 19](https://react.dev/)** - UI 库
+
+### 样式与组件
+
+- **[TailwindCSS v4](https://tailwindcss.com/)** - 原子化 CSS 框架
+- **[Shadcn UI](https://ui.shadcn.com/)** - 基于 Radix UI 的高质量组件库
+- **[Framer Motion](https://www.framer.com/motion/)** - 流畅的动画效果
+- **[Lucide Icons](https://lucide.dev/)** - 现代化图标库
+
+### 数据可视化
+
+- **[ECharts](https://echarts.apache.org/)** - 专业的地图和图表库
+- **[Recharts](https://recharts.org/)** - React 图表组件
+
+### 工具库
+
+- **[Zod](https://zod.dev/)** - TypeScript 优先的模式验证
+- **[date-fns](https://date-fns.org/)** - 日期处理
+- **[clsx](https://github.com/lukeed/clsx)** - 条件类名组合
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Node.js 20+
+- Bun / npm / yarn / pnpm (推荐使用 Bun)
+
+### 安装依赖
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 使用 bun (推荐)
+bun install
+
+# 或使用 npm
+npm install
+
+# 或使用 yarn
+yarn install
+
+# 或使用 pnpm
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 启动开发服务器
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# 使用 bun
+bun dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 或使用 npm
+npm run dev
 
-## Learn More
+# 或使用 yarn
+yarn dev
 
-To learn more about Next.js, take a look at the following resources:
+# 或使用 pnpm
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看项目。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 构建生产版本
 
-## Deploy on Vercel
+```bash
+# 构建
+bun run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 启动生产服务器
+bun start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📁 项目结构
+
+```
+rainbow-paths/
+├── app/                      # Next.js App Router
+│   ├── layout.tsx           # 全局布局
+│   ├── page.tsx             # 首页
+│   └── globals.css          # 全局样式
+├── components/              # React 组件
+│   ├── home/               # 首页区块组件
+│   │   ├── hero-section.tsx
+│   │   ├── map-section.tsx
+│   │   ├── timeline-section.tsx
+│   │   ├── stats-section.tsx
+│   │   └── data-section.tsx
+│   ├── ui/                 # 基础 UI 组件 (Shadcn)
+│   ├── echarts-world-map.tsx
+│   ├── timeline-chart.tsx
+│   └── ...
+├── hooks/                   # 自定义 React Hooks
+│   ├── use-world-map.ts
+│   ├── use-timeline-data.ts
+│   ├── use-stats-data.ts
+│   └── ...
+├── lib/                     # 工具函数
+│   ├── utils.ts
+│   ├── translations.ts
+│   └── world-map-config.ts
+├── services/               # 业务逻辑服务
+│   ├── mapDataService.ts
+│   ├── timelineService.ts
+│   ├── statsService.ts
+│   └── ...
+├── data/                   # 数据文件
+│   ├── same-sex.json      # 同性婚姻政策数据
+│   ├── country-names-zh.json
+│   └── ...
+├── doc/                    # 项目文档
+│   ├── 项目书.md
+│   └── 首页设计书-精简版.md
+├── public/                 # 静态资源
+└── package.json
+```
+
+## 🎨 设计系统
+
+项目采用 **Notion 风格** 的设计语言:
+
+- **色彩**: 克制而温暖的中性色 + 低饱和度彩虹强调色
+- **字体**: Inter (英文) + Noto Sans SC (中文)
+- **组件**: 基于 Shadcn UI,保持简洁优雅
+- **动画**: 微妙、快速、自然的过渡效果
+
+详见 [项目书.md](./doc/项目书.md) 的设计系统章节。
+
+## 📊 数据说明
+
+### 数据来源
+
+- 各国/地区官方政策文件
+- 权威国际组织报告
+- 社区志愿者收集整理
+
+### 数据结构
+
+主要数据存储在 `data/same-sex.json`,包含:
+
+- 国家/地区基本信息
+- 政策状态和生效日期
+- 法律框架和权利范围
+- 办理流程和要求
+
+### 数据更新
+
+- 定期审核和更新
+- 接受社区贡献和修正
+- 所有变更可在 Git 历史中追溯
+
+## 🤝 贡献指南
+
+我们欢迎各种形式的贡献!
+
+### 如何贡献
+
+1. **Fork 本仓库**
+2. **创建特性分支** (`git checkout -b feature/AmazingFeature`)
+3. **提交更改** (`git commit -m 'Add some AmazingFeature'`)
+4. **推送到分支** (`git push origin feature/AmazingFeature`)
+5. **创建 Pull Request**
+
+### 贡献类型
+
+- 🐛 修复 Bug
+- ✨ 添加新功能
+- 📝 完善文档
+- 🌐 添加/更新政策数据
+- 🎨 改进 UI/UX
+- ♿ 提升无障碍性
+- 🌍 多语言翻译
+
+### 代码规范
+
+- 使用 TypeScript,保持类型安全
+- 遵循 ESLint 规则
+- 组件优先使用函数式组件和 Hooks
+- 保持代码简洁可读,适当添加注释
+- 提交信息使用清晰的描述
+
+## 🧪 测试
+
+```bash
+# 运行 linter
+bun run lint
+```
+
+## 🌱 志愿者招募
+
+我们需要你的帮助! 无论你擅长:
+
+- 💻 **开发** - 前端、后端、全栈
+- 🎨 **设计** - UI/UX、插画、视觉设计
+- 📝 **内容** - 文案、翻译、资料整理
+- 📊 **研究** - 政策追踪、数据收集
+- ⚖️ **法律** - 法律审核、咨询支持
+
+都欢迎加入我们! 请通过 Issues 或 Email 联系。
+
+## 📄 开源协议
+
+本项目采用 [MIT License](./LICENSE) 开源协议。
+
+你可以自由地:
+
+- 使用本项目代码
+- 修改和定制
+- 分发和传播
+
+唯一要求:
+
+- 保留原作者版权声明
+- 不将本项目用于歧视或伤害 LGBTQ+ 群体的目的
+
+## 🙏 致谢
+
+- 所有为平权事业奋斗的人们
+- 开源社区提供的优秀工具和库
+- 每一位贡献者和支持者
+
+## 📞 联系我们
+
+- 📧 Email: [待补充]
+- 💬 GitHub Issues: [提交问题或建议](https://github.com/rainbow-paths/rainbow-paths/issues)
+- 🌐 Website: [待上线]
+
+## 💌 写在最后
+
+**Rainbow Paths** 不只是一个网站,更是一份承诺:
+
+> 无论你在世界的哪个角落,  
+> 无论你的爱情面临怎样的困境,  
+> 总有一条路,为你而存在。
+>
+> 愿每一对相爱的人,  
+> 都能手牵手,走过彩虹,  
+> 抵达幸福。
+
+**Let's build this rainbow together. 🌈**
+
+---
+
+_© 2024 Rainbow Paths · 公益项目 · 愿爱与平等,终将照亮世界每一个角落。_
