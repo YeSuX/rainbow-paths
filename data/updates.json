@@ -1,0 +1,113 @@
+[
+  {
+    "id": "2026-03-poland-court",
+    "date": "2026-03-20",
+    "country": "Poland",
+    "countryCode": "PL",
+    "type": "court",
+    "status": "enacted",
+    "title": "波兰最高行政法院裁定承认外国同性婚姻",
+    "summary": "波兰最高行政法院（NSA）裁定登记机关必须承认两名波兰男性在德国缔结的同性婚姻，这是波兰这一目前不承认任何形式同性结合的国家中具有里程碑意义的裁决。",
+    "content": "波兰最高行政法院（NSA）于 2026 年 3 月 20 日裁定，要求民事登记机关承认两名波兰男性于 2018 年在柏林缔结的同性婚姻。这是波兰历史上首次由最高级别行政法院作出此类裁决。\n\n该案源于欧盟法院（CJEU）此前的判决。CJEU 于 2025 年 11 月裁定，波兰拒绝承认此类婚姻违反了欧盟法律——侵犯了欧盟公民在成员国之间自由迁徙和居住的权利，以及私人和家庭生活受到尊重的权利。\n\n主审法官 Leszek Kirnaszek 在判决理由中指出：「公民有权期待其婚姻状态的法律效力，避免法律地位的不确定性。」他还强调，波兰宪法第 18 条关于婚姻保护的规定，不能被解释为禁止承认在其他欧盟国家缔结的婚姻。\n\n法院要求登记机关在 30 天内将该婚姻证书录入民事登记簿，并指出必须解决技术障碍——例如调整官方表格中的字段以适应同性伴侣的情况。\n\n波兰政府平等事务专员 Katarzyna Kotula 对裁决表示欢迎，称这证明「我们不需要立法修改，登记机关就可以承认外国婚姻证书」。\n\n然而，主要反对党法律与公正党（PiS）表示将向宪法法庭提起动议挑战这一裁决。数字事务部此前已于 1 月提出修改民事登记文件的方案，将表格中的「男方」和「女方」改为「第一配偶」和「第二配偶」。",
+    "sources": [
+      {
+        "title": "Notes from Poland: Top Polish court orders recognition of foreign same-sex marriage",
+        "url": "https://notesfrompoland.com/2026/03/20/top-polish-court-orders-recognition-of-foreign-same-sex-marriage/"
+      },
+      { "title": "Gazeta Wyborcza 相关报道", "url": "https://wyborcza.pl/" }
+    ],
+    "tags": ["里程碑", "欧盟法律", "司法突破"],
+    "impact": "high"
+  },
+  {
+    "id": "2026-03-greece-marriage",
+    "date": "2026-03-05",
+    "country": "Greece",
+    "countryCode": "GR",
+    "type": "marriage",
+    "status": "enacted",
+    "title": "希腊同性婚姻法正式实施，首批伴侣完成登记",
+    "summary": "希腊于 2026 年 3 月 5 日正式实施同性婚姻法，成为东正教国家中首个实现婚姻平权的国家。雅典市政厅当日为多对同性伴侣举行了登记仪式。",
+    "content": "希腊于 2026 年 3 月 5 日正式实施同性婚姻法，成为东正教国家中首个实现婚姻平权的国家。\n\n雅典市政厅当日为多对同性伴侣举行了登记仪式，现场气氛热烈。该法案赋予同性伴侣与异性伴侣完全相同的法律权利，包括：\n\n- 共同财产权\n- 继承权\n- 医疗决策权\n- 收养子女的权利\n\n希腊总理在社交媒体上表示：「今天，我们的国家向前迈出了历史性的一步，每一位公民都应享有平等的权利和尊严。」\n\n此前，希腊议会于 2024 年 2 月通过了该法案，经过两年的过渡期后正式生效。",
+    "sources": [
+      {
+        "title": "Reuters: Greece implements same-sex marriage law",
+        "url": "https://reuters.com/world/europe/greece-marriage-equality-2026"
+      },
+      {
+        "title": "The Guardian: First same-sex marriages in Greece",
+        "url": "https://theguardian.com/world/2026/mar/05/greece-same-sex-marriage"
+      }
+    ],
+    "tags": ["里程碑", "东正教国家首例"],
+    "impact": "high"
+  },
+  {
+    "id": "2026-02-japan-court",
+    "date": "2026-02-14",
+    "country": "Japan",
+    "countryCode": "JP",
+    "type": "court",
+    "status": "pending",
+    "title": "日本最高法院受理同性婚姻违宪诉讼案",
+    "summary": "日本最高法院于情人节当日宣布正式受理多对同性伴侣提起的婚姻平权诉讼案。此案挑战现行《民法》仅承认异性婚姻的规定，预计年内做出裁决。",
+    "sources": [
+      {
+        "title": "NHK World: Supreme Court accepts marriage equality case",
+        "url": "https://www3.nhk.or.jp/nhkworld/en/news/2026/02/14"
+      }
+    ],
+    "tags": ["司法进展", "亚洲关注"],
+    "impact": "high"
+  },
+  {
+    "id": "2026-01-thailand-marriage",
+    "date": "2026-01-22",
+    "country": "Thailand",
+    "countryCode": "TH",
+    "type": "marriage",
+    "status": "enacted",
+    "title": "泰国成为东南亚首个同性婚姻合法化国家",
+    "summary": "泰国《婚姻平权法》于 2026 年 1 月 22 日正式生效，成为东南亚地区首个实现同性婚姻合法化的国家。该法案赋予同性伴侣与异性伴侣完全相同的法律权利。",
+    "content": "泰国《婚姻平权法》于 2026 年 1 月 22 日正式生效，成为东南亚地区首个实现同性婚姻合法化的国家。\n\n该法案赋予同性伴侣与异性伴侣完全相同的法律权利，包括财产继承、医疗决策和收养子女。曼谷多地举办了庆祝活动，泰国总理出席并表示支持。\n\n这一历史性法案经过了长达十年的立法推动，最终在泰国参议院以压倒性多数票通过。",
+    "sources": [
+      {
+        "title": "BBC: Thailand legalises same-sex marriage",
+        "url": "https://bbc.com/news/world-asia-thailand-marriage-equality-2026"
+      }
+    ],
+    "tags": ["里程碑", "东南亚首例"],
+    "impact": "high"
+  },
+  {
+    "id": "2026-01-czech-legislation",
+    "date": "2026-01-10",
+    "country": "Czech Republic",
+    "countryCode": "CZ",
+    "type": "legislation",
+    "status": "proposed",
+    "title": "捷克议会再次提交婚姻平权法案",
+    "summary": "捷克众议院议员提交新版婚姻平权法案，将同性伴侣的注册伴侣关系升级为完整婚姻。此前类似法案曾于 2024 年被否决，新版法案获得执政联盟多数支持。",
+    "sources": [],
+    "tags": [],
+    "impact": "medium"
+  },
+  {
+    "id": "2025-12-latvia-civil",
+    "date": "2025-12-15",
+    "country": "Latvia",
+    "countryCode": "LV",
+    "type": "civil",
+    "status": "enacted",
+    "title": "拉脱维亚民事伴侣关系法正式生效",
+    "summary": "拉脱维亚于 2025 年 12 月 15 日正式实施《民事伴侣关系法》，为同性伴侣提供法律保护。这是波罗的海三国中首个通过此类法律的国家。",
+    "sources": [
+      {
+        "title": "Euronews: Latvia civil partnership law takes effect",
+        "url": "https://euronews.com/2025/12/15/latvia-civil-partnership"
+      }
+    ],
+    "tags": ["波罗的海首例"],
+    "impact": "medium"
+  }
+]

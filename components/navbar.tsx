@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Menu, Github, Info } from "lucide-react";
+import { Menu, Github, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -68,6 +68,19 @@ export function Navbar() {
               className="h-10 min-w-[44px]"
               asChild
             >
+              <Link href="/updates">
+                <span>
+                  <Newspaper className="w-4 h-4" />
+                </span>
+                最新动态
+              </Link>
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-10 min-w-[44px]"
+              asChild
+            >
               <Link
                 href="https://github.com/YeSuX/rainbow-paths"
                 target="_blank"
@@ -98,6 +111,19 @@ export function Navbar() {
                 <SheetTitle></SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-2 text-[#37352F] mt-4">
+                <Button
+                  variant="ghost"
+                  className="justify-start gap-2 h-12 min-h-[44px]"
+                  asChild
+                  onClick={closeMobileMenu}
+                >
+                  <Link href="/updates">
+                    <span>
+                      <Newspaper className="w-4 h-4" />
+                    </span>
+                    最新动态
+                  </Link>
+                </Button>
                 <Button
                   variant="ghost"
                   className="justify-start gap-2 h-12 min-h-[44px]"
